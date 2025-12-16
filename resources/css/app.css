@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Outfit', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Custom Utilities */
+.yuasa-red { background-color: #9E3E3E; }
+.yuasa-dark { background-color: #0A1A32; }
+.sidebar-grad { background: linear-gradient(180deg, #0A1A32 0%, #061021 100%); }
+.sidebar-link { position: relative; overflow: hidden; }
+.sidebar-link::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #9E3E3E; opacity: 0; transition: opacity 0.3s; }
+.sidebar-link.active::before { opacity: 1; }
+.sidebar-link.active { background: rgba(255, 255, 255, 0.08); }
+.glass-header { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(229, 231, 235, 0.5); }
+[x-cloak] { display: none !important; }
