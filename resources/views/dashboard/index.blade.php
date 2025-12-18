@@ -31,16 +31,7 @@
         </div>
     </div>
 
-    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 relative overflow-hidden group hover:shadow-lg transition-all duration-300">
-        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-            <i class="fas fa-object-group text-6xl text-[#9E3E3E]"></i>
-        </div>
-        <h3 class="text-gray-500 font-semibold uppercase tracking-wider text-xs mb-1">Asset Group</h3>
-        <p class="text-4xl font-extrabold text-[#9E3E3E]">{{ $summary['total_groups'] ?? 0 }}</p>
-        <div class="mt-4 flex items-center text-sm text-gray-500">
-            <span class="font-medium">Active Groups</span>
-        </div>
-    </div>
+    <!-- Group Stat Removed -->
 
     <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 relative overflow-hidden group hover:shadow-lg transition-all duration-300">
         <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -56,15 +47,7 @@
 
 <!-- Charts Section -->
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-        <h3 class="text-lg font-bold text-gray-800 mb-6 flex items-center">
-            <span class="w-1 h-6 bg-[#0A1A32] rounded-full mr-3"></span>
-            Assets by Group
-        </h3>
-        <div class="relative h-64">
-             <canvas id="groupChart"></canvas>
-        </div>
-    </div>
+    <!-- Group Chart Removed -->
     
     <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
         <h3 class="text-lg font-bold text-gray-800 mb-6 flex items-center">
@@ -83,38 +66,7 @@
     Chart.defaults.font.family = "'Inter', sans-serif";
     Chart.defaults.color = '#64748b';
     
-    const groupCtx = document.getElementById('groupChart').getContext('2d');
     const categoryCtx = document.getElementById('categoryChart').getContext('2d');
-
-    // Gradient
-    let gradientBlue = groupCtx.createLinearGradient(0, 0, 0, 400);
-    gradientBlue.addColorStop(0, 'rgba(10, 26, 50, 0.8)');
-    gradientBlue.addColorStop(1, 'rgba(10, 26, 50, 0.2)');
-
-    new Chart(groupCtx, {
-        type: 'bar',
-        data: {
-            labels: {!! json_encode($charts['groups']['labels']) !!},
-            datasets: [{
-                label: 'Total Assets',
-                data: {!! json_encode($charts['groups']['data']) !!},
-                backgroundColor: '#0A1A32',
-                borderRadius: 6,
-                barThickness: 20
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false }
-            },
-            scales: {
-                y: { beginAtZero: true, grid: { borderDash: [2, 4] } },
-                x: { grid: { display: false } }
-            }
-        }
-    });
 
     new Chart(categoryCtx, {
         type: 'doughnut',

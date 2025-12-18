@@ -18,6 +18,17 @@ class AssetController extends Controller
         
         if ($request->has('search')) {
             $search = $request->search;
+
+            // SCANNER LOGIC: If exact match on Code/SAP Code, redirect to detail immediately
+            $exactMatch = Asset::where('code', $search)
+                               ->orWhere('sap_code', $search)
+                               ->first();
+
+            if ($exactMatch) {
+                return redirect()->route('assets.show', $exactMatch->id);
+            }
+
+            // Normal Search
             $query->where(function($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
                   ->orWhere('code', 'like', "%{$search}%")
@@ -25,8 +36,20 @@ class AssetController extends Controller
             });
         }
 
-        if ($request->has('group')) {
-            $query->where('group', $request->group);
+        // Group filter removed
+
+        if ($request->has('category')) {
+            $query->where('category', $request->category);
+        }
+
+        if ($request->has('type')) {
+            $query->where('type', $request->type);
+        } else {
+             // Default to showing all? Or maybe fixed only? 
+             // If user goes to "Asset List" usually implies fixed. But let's keep all for now or check current behavior.
+             // Actually, if I change the link to type=fixed, it handles it. 
+             // But if I go to just /assets, what should I see? 
+             // I'll leave it as is, showing all if no filter.
         }
 
         $assets = $query->paginate(10);
@@ -48,26 +71,29 @@ class AssetController extends Controller
 
         $summary = [
             'total_assets' => Asset::sum('quantity'),
-            'total_groups' => Asset::distinct('group')->count('group'),
+            // 'total_groups' => Asset::distinct('group')->count('group'), // Removed
             'total_categories' => Asset::distinct('category')->count('category'),
             'month_growth' => round($growth, 1),
             'vs_last_month' => $currentMonthAssets - $lastMonthAssets
         ];
         
         // Data for charts
+        // Group Chart Removed
+        /*
         $groupByGroup = Asset::selectRaw('`group`, count(*) as count')
             ->groupBy('group')
             ->pluck('count', 'group');
+        */
 
         $groupByCategory = Asset::selectRaw('category, count(*) as count')
             ->groupBy('category')
             ->pluck('count', 'category');
 
         $charts = [
-            'groups' => [
+            /* 'groups' => [
                 'labels' => $groupByGroup->keys()->map(fn($k) => $k ?: 'Uncategorized')->toArray(),
                 'data' => $groupByGroup->values()->toArray(),
-            ],
+            ], */
             'categories' => [
                 'labels' => $groupByCategory->keys()->toArray(),
                 'data' => $groupByCategory->values()->toArray(),
@@ -77,13 +103,7 @@ class AssetController extends Controller
         return view('dashboard.index', compact('summary', 'charts'));
     }
 
-    public function groups()
-    {
-        $groups = Asset::selectRaw('`group`, category, count(*) as count, max(created_at) as last_update')
-            ->groupBy('group', 'category')
-            ->get();
-        return view('assets.groups', compact('groups'));
-    }
+    // Groups method removed
 
     public function categories()
     {
@@ -111,7 +131,7 @@ class AssetController extends Controller
             'code' => 'required|unique:assets',
             'sap_code' => 'nullable|unique:assets',
             'category' => 'required',
-            'group' => 'nullable',
+            // 'group' => 'required|string', // Removed
             'department' => 'nullable',
             'section' => 'nullable',
             'pic' => 'nullable',
@@ -121,6 +141,10 @@ class AssetController extends Controller
         ]);
 
         $data = $request->all();
+        // Initialize stock to be equal to quantity if not set
+        if (!isset($data['stock'])) {
+            $data['stock'] = $data['quantity'];
+        }
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('assets', 'public');

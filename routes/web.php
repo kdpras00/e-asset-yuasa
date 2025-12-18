@@ -24,7 +24,7 @@ Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])->name('otp.chec
 // Protected Routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [AssetController::class, 'dashboard'])->name('dashboard');
-    Route::get('/assets/groups', [AssetController::class, 'groups'])->name('assets.groups');
+    // Route::get('/assets/groups', [AssetController::class, 'groups'])->name('assets.groups'); // Removed
     Route::get('/assets/categories', [AssetController::class, 'categories'])->name('assets.categories');
     
     Route::get('/assets/{asset}/documents/create', [AssetController::class, 'createDocument'])->name('assets.documents.create');
@@ -38,8 +38,16 @@ Route::middleware(['auth'])->group(function () {
     // Centralized Document Upload
     Route::get('/documents/upload', [ReportController::class, 'create'])->name('documents.create');
     Route::post('/documents', [ReportController::class, 'store'])->name('documents.store');
-    
+    Route::get('/documents/{document}', [ReportController::class, 'show'])->name('documents.show');
+
     Route::post('/documents/{document}/approve', [ReportController::class, 'approve'])->name('documents.approve');
     Route::post('/documents/{document}/reject', [ReportController::class, 'reject'])->name('documents.reject');
+    // Loan Management
+    Route::get('/my-loans', [\App\Http\Controllers\LoanController::class, 'myLoans'])->name('loans.my_loans');
+    Route::post('/loans/{loan}/approve', [\App\Http\Controllers\LoanController::class, 'approve'])->name('loans.approve');
+    Route::post('/loans/{loan}/reject', [\App\Http\Controllers\LoanController::class, 'reject'])->name('loans.reject');
+    Route::post('/loans/{loan}/request-return', [\App\Http\Controllers\LoanController::class, 'requestReturn'])->name('loans.request_return');
+    Route::post('/loans/{loan}/return', [\App\Http\Controllers\LoanController::class, 'returnAsset'])->name('loans.return');
+    Route::resource('loans', \App\Http\Controllers\LoanController::class);
 });
 

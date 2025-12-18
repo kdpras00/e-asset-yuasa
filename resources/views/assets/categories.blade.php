@@ -45,7 +45,7 @@
                      {{ \Carbon\Carbon::parse($cat->last_update)->format('d M Y') }}
                  </td>
                  <td class="px-8 py-5 text-right">
-                      <a href="{{ route('assets.index', ['search' => $cat->category]) }}" class="text-indigo-600 hover:text-indigo-900 border border-indigo-200 hover:bg-indigo-50 px-3 py-1 rounded-lg text-xs font-bold transition-all">
+                      <a href="{{ route('assets.index', ['category' => $cat->category]) }}" class="text-indigo-600 hover:text-indigo-900 border border-indigo-200 hover:bg-indigo-50 px-3 py-1 rounded-lg text-xs font-bold transition-all">
                           View Assets
                       </a>
                  </td>

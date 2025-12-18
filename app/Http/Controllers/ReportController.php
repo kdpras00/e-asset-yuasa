@@ -16,6 +16,12 @@ class ReportController extends Controller
         return view('reports.index', compact('documents'));
     }
 
+    public function show($id)
+    {
+        $document = Document::with('asset')->findOrFail($id);
+        return view('reports.show', compact('document'));
+    }
+
     public function approve(Document $document)
     {
         $document->update(['status' => 'approved']);

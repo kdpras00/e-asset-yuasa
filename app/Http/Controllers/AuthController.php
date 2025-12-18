@@ -43,13 +43,14 @@ class AuthController extends Controller
             'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
+            'role' => 'required|string|in:tim_faxed_asset,inventory,karyawan,pimpinan',
         ]);
 
         $user = User::create([
             'name' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'tim_faxed_asset', // Default role
+            'role' => $request->role,
         ]);
 
         Auth::login($user);

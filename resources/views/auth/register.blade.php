@@ -46,6 +46,21 @@
                     </div>
 
                     <div>
+                         <label class="block text-sm font-semibold text-gray-700 mb-2 ml-1">Role</label>
+                         <div class="relative">
+                             <i class="fas fa-user-tag absolute left-4 top-3.5 text-gray-400"></i>
+                             <select name="role" required class="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#0A1A32]/20 focus:border-[#0A1A32] transition-colors text-gray-700 bg-gray-50/50 focus:bg-white appearance-none">
+                                <option value="" disabled selected>Select Role</option>
+                                <option value="tim_faxed_asset">Tim Fixed Asset (Admin)</option>
+                                <option value="inventory">Inventory Staff</option>
+                                <option value="karyawan">Karyawan (Employee)</option>
+                                <option value="pimpinan">Pimpinan (Manager)</option>
+                             </select>
+                             <i class="fas fa-chevron-down absolute right-4 top-4 text-gray-400 pointer-events-none text-xs"></i>
+                         </div>
+                    </div>
+
+                    <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2 ml-1">Email Address</label>
                         <div class="relative">
                             <i class="fas fa-envelope absolute left-4 top-3.5 text-gray-400"></i>

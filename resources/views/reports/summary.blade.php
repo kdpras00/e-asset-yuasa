@@ -20,7 +20,7 @@
     </div>
 
     <!-- Total Value -->
-    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+    <!-- <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
         <div>
             <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Asset Value</p>
             <p class="text-2xl font-bold text-gray-800 mt-1">Rp {{ number_format($totalValue, 0, ',', '.') }}</p>
@@ -28,7 +28,7 @@
         <div class="h-10 w-10 rounded-full bg-green-50 flex items-center justify-center text-green-600">
             <i class="fas fa-money-bill-wave"></i>
         </div>
-    </div>
+    </div> -->
 
     <!-- Active -->
     <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">

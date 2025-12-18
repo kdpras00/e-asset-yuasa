@@ -40,6 +40,7 @@
                     <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Department</th>
                     <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Status</th>
                     <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Qty</th>
+                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Stock</th>
                     @if(Auth::user()->role != 'pimpinan')
                     <th class="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider">Action</th>
                     @endif
@@ -85,8 +86,11 @@
                             {{ ucfirst($asset->status) }}
                         </span>
                     </td>
-                    <td class="px-6 py-4 text-sm text-gray-700 font-bold">
+                    <td class="px-6 py-4 text-sm text-gray-500">
                         {{ $asset->quantity }}
+                    </td>
+                    <td class="px-6 py-4 text-sm font-bold {{ $asset->stock > 0 ? 'text-green-600' : 'text-red-600' }}">
+                        {{ $asset->stock }}
                     </td>
                     @if(Auth::user()->role != 'pimpinan')
                     <td class="px-6 py-4 text-right">
@@ -110,7 +114,7 @@
                 </tr>
                 @empty
                  <tr>
-                    <td colspan="6" class="px-6 py-10 text-center text-gray-500">
+                    <td colspan="7" class="px-6 py-10 text-center text-gray-500">
                         <div class="flex flex-col items-center justify-center">
                             <i class="fas fa-box-open text-4xl mb-3 text-gray-300"></i>
                             <p>No assets found.</p>

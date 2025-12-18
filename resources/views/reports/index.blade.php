@@ -63,12 +63,11 @@
                         <p class="text-gray-900 whitespace-no-wrap">{{ $doc->created_at->format('d M Y') }}</p>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <a href="{{ Storage::url($doc->file_path) }}" target="_blank" class="text-blue-600 hover:text-blue-900 mr-3 block mb-1">
-                            <i class="fas fa-eye"></i> Lihat
+                        <a href="{{ route('documents.show', $doc->id) }}" class="text-blue-600 hover:text-blue-900 mr-3 block mb-1 font-bold">
+                            <i class="fas fa-eye"></i> Lihat Detail
                         </a>
                         
-                        @if($doc->status == 'pending')
-                            @if(Auth::user()->role != 'pimpinan')
+                        @if($doc->status == 'pending' && Auth::user()->role == 'pimpinan')
                             <div class="flex mt-2">
                                 <form action="{{ route('documents.approve', $doc->id) }}" method="POST" class="mr-2">
                                     @csrf
@@ -83,11 +82,6 @@
                                     </button>
                                 </form>
                             </div>
-                            @else
-                                <span class="text-xs text-gray-400 italic mt-2 block">Pending Approval</span>
-                            @endif
-                        @else
-                             <span class="text-xs text-gray-500 italic">No Action</span>
                         @endif
                     </td>
                 </tr>
