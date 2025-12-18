@@ -9,9 +9,9 @@
                 <a href="{{ route('loans.index') }}" class="text-gray-400 hover:text-gray-600 transition-colors">
                     <i class="fas fa-arrow-left"></i>
                 </a>
-                <h1 class="text-2xl font-bold text-gray-800 tracking-tight">Loan Detail</h1>
+                <h1 class="text-2xl font-bold text-gray-800 tracking-tight">Detail Peminjaman</h1>
             </div>
-            <p class="text-gray-500 text-sm ml-7">Request ID: #{{ $loan->id }}</p>
+            <p class="text-gray-500 text-sm ml-7">ID Permintaan: #{{ $loan->id }}</p>
         </div>
         
         <!-- Action Buttons for Pimpinan -->
@@ -21,13 +21,13 @@
                  <form action="{{ route('loans.approve', $loan->id) }}" method="POST">
                     @csrf
                     <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-xl shadow font-bold transition-all flex items-center">
-                        <i class="fas fa-check mr-2"></i> Approve Loan
+                        <i class="fas fa-check mr-2"></i> Setujui
                     </button>
                 </form>
                 <form action="{{ route('loans.reject', $loan->id) }}" method="POST">
                     @csrf
                     <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-xl shadow font-bold transition-all flex items-center">
-                        <i class="fas fa-times mr-2"></i> Reject Loan
+                        <i class="fas fa-times mr-2"></i> Tolak
                     </button>
                 </form>
             </div>
@@ -36,26 +36,25 @@
                  <form action="{{ route('loans.approve', $loan->id) }}" method="POST">
                     @csrf
                     <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl shadow font-bold transition-all flex items-center">
-                        <i class="fas fa-check-double mr-2"></i> Confirm Return
+                        <i class="fas fa-check-double mr-2"></i> Konfirmasi Pengembalian
                     </button>
                 </form>
                 <form action="{{ route('loans.reject', $loan->id) }}" method="POST">
                     @csrf
                     <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-xl shadow font-bold transition-all flex items-center">
-                        <i class="fas fa-times mr-2"></i> Reject Return
+                        <i class="fas fa-times mr-2"></i> Tolak Pengembalian
                     </button>
                 </form>
             </div>
             @endif
         @endif
 
-        <!-- Mark Returned Action (Available to Tim Asset or Borrower or Pimpinan) -->
-        @if($loan->status == 'borrowed')
-            {{-- Assuming anyone can mark return for now as it was in index, or restrict if needed --}}
+        <!-- Mark Returned Action (Available to Tim Asset ONLY) -->
+        @if($loan->status == 'borrowed' && Auth::user()->role == 'tim_faxed_asset')
              <form action="{{ route('loans.return', $loan->id) }}" method="POST">
                 @csrf
                 <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl shadow font-bold transition-all flex items-center">
-                    <i class="fas fa-undo mr-2"></i> Mark Returned
+                    <i class="fas fa-undo mr-2"></i> Tandai Kembali
                 </button>
             </form>
         @endif
@@ -64,7 +63,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Asset Information -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-            <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-6 pb-2 border-b border-gray-50">Asset Info</h3>
+            <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-6 pb-2 border-b border-gray-50">Info Aset</h3>
             
             <div class="flex items-start gap-4 mb-6">
                  @if($loan->asset->image)
@@ -83,11 +82,11 @@
             
             <div class="space-y-4">
                  <div>
-                    <p class="text-xs text-gray-400">Location</p>
+                    <p class="text-xs text-gray-400">Lokasi</p>
                     <p class="font-semibold text-gray-800">{{ $loan->asset->group }}</p>
                 </div>
                  <div>
-                    <p class="text-xs text-gray-400">Current Condition</p>
+                    <p class="text-xs text-gray-400">Kondisi Saat Ini</p>
                     <p class="font-semibold text-gray-800 capitalize">{{ $loan->asset->status }}</p>
                 </div>
             </div>
@@ -96,7 +95,7 @@
         <!-- Loan Information -->
         <div class="space-y-6">
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-6 pb-2 border-b border-gray-50">Borrower Info</h3>
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-6 pb-2 border-b border-gray-50">Info Peminjam</h3>
                 <div class="flex items-center gap-4">
                      <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 font-bold text-xl">
                         {{ substr($loan->user->name, 0, 1) }}
@@ -110,11 +109,11 @@
             </div>
 
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-                 <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-6 pb-2 border-b border-gray-50">Request Details</h3>
+                 <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-6 pb-2 border-b border-gray-50">Detail Permintaan</h3>
                  
                  <div class="space-y-4">
                     <div>
-                        <p class="text-xs text-gray-400">Request Date</p>
+                        <p class="text-xs text-gray-400">Tanggal Permintaan</p>
                         <p class="font-semibold text-gray-800">{{ \Carbon\Carbon::parse($loan->loan_date)->format('d F Y') }}</p>
                     </div>
                     <div>
@@ -125,14 +124,55 @@
                             {{ ucfirst($loan->status) }}
                         </span>
                     </div>
+                    <div>
+                        <p class="text-xs text-gray-400">Jumlah Pinjam</p>
+                        <p class="font-bold text-gray-800 text-lg">{{ $loan->amount ?? 1 }} Unit</p>
+                    </div>
                     @if($loan->notes)
                     <div>
-                        <p class="text-xs text-gray-400">Notes / Purpose</p>
+                        <p class="text-xs text-gray-400">Catatan</p>
                         <p class="font-medium text-gray-700 mt-1 italic">"{{ $loan->notes }}"</p>
                     </div>
                     @endif
                  </div>
             </div>
+
+            <!-- Timeline Activity -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-6 pb-2 border-b border-gray-50">Aktivitas Timeline</h3>
+                
+                <div class="relative border-l-2 border-gray-100 ml-3 space-y-8">
+                    @forelse($loan->activities as $activity)
+                    <div class="relative pl-8">
+                        <!-- Icon -->
+                        <div class="absolute -left-[9px] top-0 w-5 h-5 rounded-full border-2 border-white 
+                            {{ $activity->action == 'created' ? 'bg-blue-500' : 
+                              ($activity->action == 'approved' ? 'bg-green-500' : 
+                              ($activity->action == 'rejected' ? 'bg-red-500' : 
+                              ($activity->action == 'returned' ? 'bg-teal-500' : 'bg-gray-400'))) }}">
+                        </div>
+                        
+                        <div>
+                            <p class="text-sm font-bold text-gray-800 capitalize">
+                                {{ str_replace('_', ' ', $activity->action) }}
+                            </p>
+                            <p class="text-xs text-gray-500 mt-0.5">
+                                oleh <span class="font-semibold text-gray-700">{{ $activity->user->name ?? 'Unknown' }}</span> • {{ $activity->created_at->format('d M H:i') }}
+                            </p>
+                            @if($activity->description)
+                            <p class="text-xs text-gray-400 mt-1 italic">
+                                "{{ $activity->description }}"
+                            </p>
+                            @endif
+                        </div>
+                    </div>
+                    @empty
+                    <p class="text-sm text-gray-400 pl-4 italic">Belum ada aktivitas tercatat.</p>
+                    @endforelse
+                </div>
+            </div>
+
+
         </div>
     </div>
 </div>

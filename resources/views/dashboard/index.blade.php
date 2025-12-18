@@ -3,17 +3,10 @@
 @section('content')
 <div class="mb-8 flex justify-between items-center">
     <div>
-        <h1 class="text-3xl font-bold text-gray-800 tracking-tight">Dashboard Overview</h1>
-        <p class="text-gray-500 mt-1">Monitor asset performance and distribution.</p>
+        <h1 class="text-3xl font-bold text-gray-800 tracking-tight">Ringkasan Dashboard</h1>
+        <p class="text-gray-500 mt-1">Monitor performa dan distribusi aset.</p>
     </div>
-    <div class="flex gap-3">
-         <button class="bg-white text-gray-600 px-4 py-2 rounded-lg shadow-sm font-medium hover:bg-gray-50 border transition-transform hover:-translate-y-0.5">
-            <i class="fas fa-filter mr-2"></i> Filter
-        </button>
-        <button class="bg-[#0A1A32] text-white px-4 py-2 rounded-lg shadow-lg font-medium hover:bg-[#152a4d] transition-transform hover:-translate-y-0.5">
-            <i class="fas fa-download mr-2"></i> Export Report
-        </button>
-    </div>
+
 </div>
 
 <!-- Stats Cards -->
@@ -22,12 +15,12 @@
         <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
             <i class="fas fa-boxes text-6xl text-blue-900"></i>
         </div>
-        <h3 class="text-gray-500 font-semibold uppercase tracking-wider text-xs mb-1">Total Asset List</h3>
+        <h3 class="text-gray-500 font-semibold uppercase tracking-wider text-xs mb-1">Total Daftar Aset</h3>
         <p class="text-4xl font-extrabold text-[#0A1A32]">{{ $summary['total_assets'] ?? 0 }}</p>
         <div class="mt-4 flex items-center text-sm {{ $summary['month_growth'] >= 0 ? 'text-green-600' : 'text-red-600' }}">
             <i class="fas fa-arrow-{{ $summary['month_growth'] >= 0 ? 'up' : 'down' }} mr-1"></i> 
             <span class="font-bold">{{ abs($summary['month_growth']) }}%</span> 
-            <span class="text-gray-400 ml-1">vs last month</span>
+            <span class="text-gray-400 ml-1">vs bulan lalu</span>
         </div>
     </div>
 
@@ -40,7 +33,7 @@
         <h3 class="text-gray-500 font-semibold uppercase tracking-wider text-xs mb-1">Kategori</h3>
         <p class="text-4xl font-extrabold text-purple-700">{{ $summary['total_categories'] ?? 0 }}</p>
         <div class="mt-4 flex items-center text-sm text-gray-500">
-             <span class="font-medium">Types of Assets</span>
+             <span class="font-medium">Tipe Aset</span>
         </div>
     </div>
 </div>
@@ -52,7 +45,7 @@
     <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
         <h3 class="text-lg font-bold text-gray-800 mb-6 flex items-center">
              <span class="w-1 h-6 bg-[#9E3E3E] rounded-full mr-3"></span>
-            Assets by Category
+            Aset berdasarkan Kategori
         </h3>
         <div class="relative h-64">
             <canvas id="categoryChart"></canvas>

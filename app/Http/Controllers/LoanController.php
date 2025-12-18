@@ -51,7 +51,8 @@ class LoanController extends Controller
         // For simplicity, let's just show all available assets.
         
         $assets = \App\Models\Asset::where('status', 'baik')->get();
-        $users = \App\Models\User::all(); // Allow lending to any user
+        // Only allow lending to Karyawan (exclude admin/pimpinan)
+        $users = \App\Models\User::where('role', 'karyawan')->get();
         
         return view('loans.create', compact('assets', 'users'));
     }
@@ -64,16 +65,36 @@ class LoanController extends Controller
             'user_id' => 'required|exists:users,id',
             'loan_date' => 'required|date',
             'notes' => 'nullable|string',
+            'amount' => [
+                'required',
+                'integer',
+                'min:1',
+                function ($attribute, $value, $fail) use ($request) {
+                    $asset = \App\Models\Asset::find($request->asset_id);
+                    if ($asset && $value > $asset->stock) {
+                        $fail("The $attribute exceeds available stock ($asset->stock units).");
+                    }
+                },
+            ],
         ]);
 
         $status = 'pending'; // All requests require approval (e.g. from Kepala Dept)
 
-        \App\Models\AssetLoan::create([
+        $loan = \App\Models\AssetLoan::create([
             'asset_id' => $request->asset_id,
             'user_id' => $request->user_id,
             'loan_date' => $request->loan_date,
             'status' => $status,
             'notes' => $request->notes,
+            'amount' => $request->amount,
+        ]);
+        
+        // Log Activity
+        \App\Models\LoanActivity::create([
+            'asset_loan_id' => $loan->id,
+            'user_id' => \Illuminate\Support\Facades\Auth::id(),
+            'action' => 'created',
+            'description' => 'Loan request submitted with amount: ' . $request->amount,
         ]);
 
         $msg = $status === 'pending' ? 'Loan request submitted successfully.' : 'Asset successfully loaned.';
@@ -82,7 +103,7 @@ class LoanController extends Controller
 
     public function show($id)
     {
-        $loan = \App\Models\AssetLoan::with(['user', 'asset'])->findOrFail($id);
+        $loan = \App\Models\AssetLoan::with(['user', 'asset', 'activities.user'])->findOrFail($id);
         return view('loans.show', compact('loan'));
     }
     
@@ -94,28 +115,43 @@ class LoanController extends Controller
             $asset = $loan->asset;
             
             // Check stock availability
-            if ($asset->stock < 1) {
-                return back()->with('error', 'Cannot approve loan. Stock is empty.');
+            if ($asset->stock < $loan->amount) {
+                return back()->with('error', 'Cannot approve loan. Insufficient stock (Requested: '.$loan->amount.', Available: '.$asset->stock.').');
             }
 
             // Decrement Stock
-            $asset->decrement('stock');
+            $asset->decrement('stock', $loan->amount);
             
             // Update status
             $loan->update(['status' => 'borrowed']);
             
-            // If fixed asset reaches 0 qty, verify if status should change? 
-            // For now, let's keep it simple. If fixed asset is borrowed, it's borrowed.
+            // Log Activity
+            \App\Models\LoanActivity::create([
+                'asset_loan_id' => $loan->id,
+                'user_id' => \Illuminate\Support\Facades\Auth::id(),
+                'action' => 'approved',
+                'description' => 'Loan request approved. Stock reduced by ' . $loan->amount,
+            ]);
             
             return back()->with('success', 'Loan request approved. Stock updated.');
 
         } elseif ($loan->status == 'pending_return') {
-            $loan->asset->increment('stock'); // Increment stock on return
+            // Increment stock by loan amount on return
+            $loan->asset->increment('stock', $loan->amount);
             
             $loan->update([
                 'status' => 'returned',
                 'return_date' => now(),
             ]);
+            
+            // Log Activity
+            \App\Models\LoanActivity::create([
+                'asset_loan_id' => $loan->id,
+                'user_id' => \Illuminate\Support\Facades\Auth::id(),
+                'action' => 'returned',
+                'description' => 'Return request approved. Stock restored by ' . $loan->amount,
+            ]);
+            
             return back()->with('success', 'Return request approved. Stock restored.');
         }
         
@@ -128,10 +164,28 @@ class LoanController extends Controller
         
         if ($loan->status == 'pending') {
             $loan->update(['status' => 'rejected']);
+            
+            // Log Activity
+            \App\Models\LoanActivity::create([
+                'asset_loan_id' => $loan->id,
+                'user_id' => \Illuminate\Support\Facades\Auth::id(),
+                'action' => 'rejected',
+                'description' => 'Loan request rejected.',
+            ]);
+            
             return back()->with('success', 'Loan request rejected.');
         } elseif ($loan->status == 'pending_return') {
             // Rejecting a return means it's still borrowed (maybe damaged or not actually returned)
             $loan->update(['status' => 'borrowed']);
+            
+            // Log Activity
+            \App\Models\LoanActivity::create([
+                'asset_loan_id' => $loan->id,
+                'user_id' => \Illuminate\Support\Facades\Auth::id(),
+                'action' => 'return_rejected',
+                'description' => 'Return request rejected. Status reverted to borrowed.',
+            ]);
+            
             return back()->with('success', 'Return request rejected. Asset status reverted to borrowed.');
         }
         
@@ -153,6 +207,14 @@ class LoanController extends Controller
             'return_date' => null, // Not returned yet
         ]);
         
+        // Log Activity
+        \App\Models\LoanActivity::create([
+            'asset_loan_id' => $loan->id,
+            'user_id' => \Illuminate\Support\Facades\Auth::id(),
+            'action' => 'return_requested',
+            'description' => 'Return requested by Tim Asset.',
+        ]);
+        
         return back()->with('success', 'Return request submitted. Waiting for approval Pimpinan.');
     }
 
@@ -167,6 +229,15 @@ class LoanController extends Controller
         }
 
         $loan->update(['status' => 'pending_return']);
+        
+        // Log Activity
+        \App\Models\LoanActivity::create([
+            'asset_loan_id' => $loan->id,
+            'user_id' => \Illuminate\Support\Facades\Auth::id(),
+            'action' => 'return_requested',
+            'description' => 'Return requested by User.',
+        ]);
+            
         return back()->with('success', 'Return request submitted. Waiting for approval.');
     }
 }

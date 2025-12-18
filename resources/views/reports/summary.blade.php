@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="mb-8">
-    <h1 class="text-3xl font-bold text-gray-800 tracking-tight">Report Summary</h1>
-    <p class="text-gray-500 mt-1">Overview of asset distribution and activities.</p>
+    <h1 class="text-3xl font-bold text-gray-800 tracking-tight">Ringkasan Laporan</h1>
+    <p class="text-gray-500 mt-1">Gambaran umum distribusi aset dan aktivitas.</p>
 </div>
 
 <!-- Stats Breakdown -->
@@ -11,7 +11,7 @@
     <!-- Total Asset -->
     <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
         <div>
-            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Assets</p>
+            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Aset</p>
             <p class="text-2xl font-bold text-gray-800 mt-1">{{ number_format($totalAssets) }}</p>
         </div>
         <div class="h-10 w-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
@@ -33,7 +33,7 @@
     <!-- Active -->
     <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
         <div>
-            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Active</p>
+            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Aktif</p>
             <p class="text-2xl font-bold text-gray-800 mt-1">{{ number_format($activeAssets) }}</p>
         </div>
         <div class="h-10 w-10 rounded-full bg-purple-50 flex items-center justify-center text-purple-600">
@@ -44,7 +44,7 @@
     <!-- Maintenance -->
     <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
         <div>
-            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Maintenance</p>
+            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Perbaikan</p>
             <p class="text-2xl font-bold text-gray-800 mt-1">{{ number_format($maintenanceAssets) }}</p>
         </div>
         <div class="h-10 w-10 rounded-full bg-yellow-50 flex items-center justify-center text-yellow-600">
@@ -56,7 +56,7 @@
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     <!-- Category Chart -->
     <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-        <h3 class="text-lg font-bold text-gray-800 mb-6">Asset by Category</h3>
+        <h3 class="text-lg font-bold text-gray-800 mb-6">Aset berdasarkan Kategori</h3>
         
         <!-- Simple Bar Representation since we don't have a Chart lib installed yet -->
         <div class="space-y-4">
@@ -81,7 +81,7 @@
 
     <!-- Recent Documents -->
     <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-        <h3 class="text-lg font-bold text-gray-800 mb-6">Recent Documents</h3>
+        <h3 class="text-lg font-bold text-gray-800 mb-6">Dokumen Terbaru</h3>
         <div class="flow-root">
             <ul role="list" class="-mb-8">
                 @forelse($recentDocuments as $doc)
@@ -108,12 +108,12 @@
                     </div>
                 </li>
                 @empty
-                 <p class="text-sm text-gray-500 italic">No recent documents.</p>
+                  <p class="text-sm text-gray-500 italic">Tidak ada dokumen terbaru.</p>
                 @endforelse
             </ul>
         </div>
         <div class="mt-6 border-t border-gray-100 pt-4">
-            <a href="{{ route('reports.index') }}" class="text-sm font-medium text-blue-600 hover:text-blue-500">View all documents <span aria-hidden="true">&rarr;</span></a>
+            <a href="{{ route('reports.index') }}" class="text-sm font-medium text-blue-600 hover:text-blue-500">Lihat semua dokumen <span aria-hidden="true">&rarr;</span></a>
         </div>
     </div>
 </div>

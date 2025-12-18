@@ -4,11 +4,11 @@
 <div class="max-w-7xl mx-auto">
     <div class="mb-8 flex justify-between items-end">
         <div>
-            <h1 class="text-2xl font-bold text-gray-800 tracking-tight">Loan Management</h1>
-            <p class="text-gray-500 text-sm mt-1">Track and manage asset lending.</p>
+            <h1 class="text-2xl font-bold text-gray-800 tracking-tight">Manajemen Peminjaman</h1>
+            <p class="text-gray-500 text-sm mt-1">Lacak dan kelola peminjaman aset.</p>
         </div>
         <a href="{{ route('loans.create') }}" class="bg-[#0A1A32] text-white px-5 py-2.5 rounded-xl shadow hover:bg-[#152a4d] transition-all font-medium flex items-center">
-            <i class="fas fa-plus mr-2"></i> Lend Asset
+            <i class="fas fa-plus mr-2"></i> Peminjaman Aset
         </a>
     </div>
 
@@ -16,7 +16,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between">
             <div>
-                <p class="text-sm font-medium text-gray-400 uppercase tracking-wider">Active Loans</p>
+                <p class="text-sm font-medium text-gray-400 uppercase tracking-wider">Peminjaman Aktif</p>
                 <p class="text-2xl font-bold text-gray-800 mt-1">{{ App\Models\AssetLoan::where('status', 'borrowed')->count() }}</p>
             </div>
             <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
@@ -31,11 +31,11 @@
             <table class="w-full text-left text-sm text-gray-600">
                 <thead class="bg-gray-50 text-xs uppercase font-semibold text-gray-500">
                     <tr>
-                        <th class="px-6 py-4">Borrower</th>
-                        <th class="px-6 py-4">Asset</th>
-                        <th class="px-6 py-4">Loan Date</th>
+                        <th class="px-6 py-4">Peminjam</th>
+                        <th class="px-6 py-4">Aset</th>
+                        <th class="px-6 py-4">Tanggal Pinjam</th>
                         <th class="px-6 py-4">Status</th>
-                        <th class="px-6 py-4 text-right">Actions</th>
+                        <th class="px-6 py-4 text-right">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-50">
@@ -101,7 +101,7 @@
                     <tr>
                         <td colspan="5" class="px-6 py-12 text-center text-gray-400">
                             <i class="fas fa-box-open text-4xl mb-3 opacity-30"></i>
-                            <p>No active loans found.</p>
+                            <p>Tidak ada peminjaman aktif ditemukan.</p>
                         </td>
                     </tr>
                     @endforelse

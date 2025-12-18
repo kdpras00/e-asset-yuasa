@@ -16,6 +16,7 @@ class AssetLoan extends Model
         'return_date',
         'status',
         'notes',
+        'amount',
     ];
 
     public function user()
@@ -26,5 +27,10 @@ class AssetLoan extends Model
     public function asset()
     {
         return $this->belongsTo(Asset::class);
+    }
+
+    public function activities()
+    {
+        return $this->hasMany(LoanActivity::class)->latest();
     }
 }

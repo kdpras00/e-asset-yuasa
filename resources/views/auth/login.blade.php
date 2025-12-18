@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - E-Asset Yuasa</title>
+    <title>Masuk - E-Asset Yuasa</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -23,8 +23,8 @@
                 <div class="inline-flex items-center justify-center p-3 bg-white rounded-2xl shadow-md mb-4">
                     <img src="{{ asset('storage/logo.jpeg') }}" alt="Yuasa Logo" class="h-10">
                 </div>
-                <h2 class="text-2xl font-bold text-gray-800 tracking-tight">Welcome Back</h2>
-                <p class="text-gray-500 text-sm mt-1">Sign in to manage your assets</p>
+                <h2 class="text-2xl font-bold text-gray-800 tracking-tight">Selamat Datang Kembali</h2>
+                <p class="text-gray-500 text-sm mt-1">Silakan masuk ke akun Anda</p>
             </div>
 
             <!-- Form -->
@@ -33,12 +33,12 @@
                     @csrf
                     
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2 ml-1">Email / Username</label>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2 ml-1">Alamat Email</label>
                         <div class="relative">
                             <i class="fas fa-user absolute left-4 top-3.5 text-gray-400"></i>
                             <input type="text" name="email" value="{{ old('email') }}" required 
                                 class="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#0A1A32]/20 focus:border-[#0A1A32] transition-colors text-gray-700 bg-gray-50/50 focus:bg-white"
-                                placeholder="Enter your email">
+                                placeholder="Masukkan kata sandi">
                         </div>
                         @error('email')
                             <p class="text-red-500 text-xs mt-1 ml-1 flex items-center"><i class="fas fa-exclamation-circle mr-1"></i> {{ $message }}</p>
@@ -46,7 +46,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2 ml-1">Password</label>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2 ml-1">Kata Sandi</label>
                         <div class="relative">
                             <i class="fas fa-lock absolute left-4 top-3.5 text-gray-400"></i>
                             <input type="password" name="password" required 
@@ -56,22 +56,22 @@
                     </div>
 
                     <div class="flex items-center justify-between text-sm">
-                         <label class="flex items-center cursor-pointer">
-                            <input type="checkbox" name="remember" class="w-4 h-4 rounded text-[#0A1A32] focus:ring-[#0A1A32] border-gray-300">
-                            <span class="ml-2 text-gray-600">Remember me</span>
-                         </label>
-                         <a href="{{ route('password.request') }}" class="text-[#9E3E3E] font-medium hover:text-[#7D2E2E]">Forgot Password?</a>
+                         <label class="inline-flex items-center">
+                            <input type="checkbox" name="remember" class="rounded border-gray-300 text-[#0A1A32] shadow-sm focus:border-[#0A1A32] focus:ring focus:ring-[#0A1A32] focus:ring-opacity-50">
+                            <span class="ml-2 text-sm text-gray-600">Ingat Saya</span>
+                        </label>
+                        <a href="{{ route('password.request') }}" class="text-sm font-semibold text-[#0A1A32] hover:underline">Lupa Password?</a>
                     </div>
 
-                    <button type="submit" class="w-full bg-[#0A1A32] text-white font-bold py-3.5 rounded-xl shadow-lg hover:bg-[#152a4d] hover:shadow-xl transition-all transform hover:-translate-y-0.5">
-                        Sign In
+                    <button type="submit" class="w-full bg-[#0A1A32] text-white font-bold py-3.5 rounded-xl shadow-lg hover:bg-[#152a4d] hover:shadow-xl transition-all transform hover:-translate-y-0.5 mt-2">
+                        Masuk
                     </button>
                 </form>
             </div>
             
             <!-- Footer -->
             <div class="bg-gray-50 px-8 py-4 text-center border-t border-gray-100">
-                <p class="text-gray-500 text-sm">Don't have an account? <a href="{{ route('register') }}" class="text-[#0A1A32] font-bold hover:underline">Sign Up</a></p>
+                <p class="text-gray-500 text-sm">Belum punya akun? <a href="{{ route('register') }}" class="text-[#0A1A32] font-bold hover:underline">Buat Akun</a></p>
             </div>
         </div>
         

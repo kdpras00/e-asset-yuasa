@@ -3,19 +3,19 @@
 @section('content')
     <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
         <div>
-           <h1 class="text-3xl font-bold text-gray-800 tracking-tight">Asset List</h1>
-           <p class="text-gray-500 mt-1">Manage and track all company assets.</p>
+           <h1 class="text-3xl font-bold text-gray-800 tracking-tight">Daftar Aset</h1>
+           <p class="text-gray-500 mt-1">Kelola dan lacak semua aset perusahaan.</p>
         </div>
         <div class="flex items-center gap-3 w-full md:w-auto">
              <!-- Search Form -->
             <form action="{{ route('assets.index') }}" method="GET" class="flex-1 md:w-64 relative">
                 <i class="fas fa-search text-gray-400 absolute left-3 top-3"></i>
-                <input type="text" name="search" placeholder="Search assets..." value="{{ request('search') }}" class="w-full pl-10 pr-4 py-2 rounded-xl border-none shadow-sm focus:ring-2 focus:ring-blue-900 bg-white text-gray-600 transition-shadow">
+                <input type="text" name="search" placeholder="Cari aset..." value="{{ request('search') }}" class="w-full pl-10 pr-4 py-2 rounded-xl border-none shadow-sm focus:ring-2 focus:ring-blue-900 bg-white text-gray-600 transition-shadow">
             </form>
             
             @if(Auth::user()->role != 'pimpinan')
             <a href="{{ route('assets.create') }}" class="bg-[#9E3E3E] hover:bg-[#7a2e2e] text-white font-bold py-2 px-6 rounded-xl shadow-lg flex items-center transition-transform hover:-translate-y-0.5">
-                <i class="fas fa-plus mr-2"></i> Add New
+                <i class="fas fa-plus mr-2"></i> Tambah Baru
             </a>
             @endif
         </div>
@@ -24,7 +24,7 @@
     @if(session('success'))
         <div x-data="{ show: true }" x-show="show" x-transition class="bg-green-50 border-l-4 border-green-500 text-green-700 p-4 rounded-r shadow-md mb-6 flex justify-between items-center">
             <div>
-                 <p class="font-bold">Success</p>
+                 <p class="font-bold">Berhasil</p>
                  <p class="text-sm">{{ session('success') }}</p>
             </div>
             <button @click="show = false" class="text-green-600 hover:text-green-800"><i class="fas fa-times"></i></button>
@@ -35,14 +35,14 @@
         <table class="min-w-full leading-normal">
             <thead>
                 <tr class="bg-gray-50 text-gray-600 border-b border-gray-200">
-                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Asset Info</th>
-                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">SAP Code</th>
-                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Department</th>
+                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Info Aset</th>
+                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Kode SAP</th>
+                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Departemen</th>
                     <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Status</th>
                     <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Qty</th>
-                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Stock</th>
+                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Stok</th>
                     @if(Auth::user()->role != 'pimpinan')
-                    <th class="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider">Action</th>
+                    <th class="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider">Aksi</th>
                     @endif
                 </tr>
             </thead>
@@ -117,7 +117,7 @@
                     <td colspan="7" class="px-6 py-10 text-center text-gray-500">
                         <div class="flex flex-col items-center justify-center">
                             <i class="fas fa-box-open text-4xl mb-3 text-gray-300"></i>
-                            <p>No assets found.</p>
+                            <p>Tidak ada aset ditemukan.</p>
                         </div>
                     </td>
                 </tr>
@@ -133,13 +133,14 @@
     <script>
         function confirmDelete(id) {
             Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                title: 'Apakah Anda yakin?',
+                text: "Anda tidak akan dapat mengembalikannya!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById('delete-form-' + id).submit();

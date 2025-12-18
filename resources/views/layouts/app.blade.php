@@ -83,12 +83,12 @@
                         <div x-show="open" x-collapse x-cloak class="pl-4 mt-1 space-y-1 overflow-hidden">
                             <a href="{{ route('assets.index', ['type' => 'fixed']) }}" class="sidebar-link group flex items-center px-4 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-white/10 transition-all {{ request()->fullUrlIs(route('assets.index', ['type' => 'fixed'])) ? 'active text-white bg-white/5' : '' }}">
                                 <span class="w-6 flex justify-center"><i class="fas fa-list text-sm"></i></span>
-                                <span class="menu-link-text ml-3 font-medium text-sm whitespace-nowrap" x-show="sidebarOpen">Asset List</span>
+                                <span class="menu-link-text ml-3 font-medium text-sm whitespace-nowrap" x-show="sidebarOpen">Daftar Aset</span>
                             </a>
                             <!-- Asset Groups link removed -->
                             <a href="{{ route('assets.categories') }}" class="sidebar-link group flex items-center px-4 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-white/10 transition-all {{ request()->routeIs('assets.categories') ? 'active text-white bg-white/5' : '' }}">
                                 <span class="w-6 flex justify-center"><i class="fas fa-tags text-sm"></i></span>
-                                <span class="menu-link-text ml-3 font-medium text-sm whitespace-nowrap" x-show="sidebarOpen">Categories</span>
+                                <span class="menu-link-text ml-3 font-medium text-sm whitespace-nowrap" x-show="sidebarOpen">Kategori</span>
                             </a>
                         </div>
                     </div>
@@ -174,7 +174,7 @@
                 <div class="flex items-center gap-6">
                     <!-- Date -->
                      <div class="hidden md:block text-right border-r pr-6 border-gray-200">
-                        <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Today</p>
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Hari Ini</p>
                         <p class="text-sm font-bold text-gray-800">{{ now()->format('d M Y') }}</p>
                     </div>
 
@@ -203,23 +203,18 @@
                              class="absolute right-0 mt-3 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50">
                             
                             <div class="px-4 py-3 border-b border-gray-50 mb-1">
-                                <p class="text-sm text-gray-500">Signed in as</p>
+                                <p class="text-sm text-gray-500">Masuk sebagai</p>
                                 <p class="text-sm font-bold text-gray-800 truncate">{{ Auth::user()->email ?? '' }}</p>
                             </div>
 
-                            <a href="#" class="block px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-blue-700 transition-colors">
-                                <i class="fas fa-user-circle mr-2 text-gray-400"></i> My Profile
-                            </a>
-                            <a href="#" class="block px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-blue-700 transition-colors">
-                                <i class="fas fa-cog mr-2 text-gray-400"></i> Settings
-                            </a>
+
                             
                             <div class="border-t border-gray-50 my-1"></div>
                             
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 font-medium transition-colors rounded-b-xl flex items-center">
-                                    <i class="fas fa-sign-out-alt mr-2"></i> Sign Out
+                                    <i class="fas fa-sign-out-alt mr-2"></i> Keluar
                                 </button>
                             </form>
                         </div>
@@ -246,7 +241,7 @@
     <script>
         Swal.fire({
             icon: 'success',
-            title: 'Success!',
+            title: 'Berhasil!',
             text: "{{ session('success') }}",
             timer: 3000,
             showConfirmButton: false,
@@ -260,7 +255,7 @@
     <script>
         Swal.fire({
             icon: 'error',
-            title: 'Error!',
+            title: 'Gagal!',
             text: "{{ session('error') }}",
             timer: 4000,
             showConfirmButton: false,
