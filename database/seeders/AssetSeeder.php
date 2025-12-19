@@ -59,7 +59,7 @@ class AssetSeeder extends Seeder
                     'code' => strtoupper(substr($category, 0, 3)) . '-' . rand(1000, 9999), 
                     'sap_code' => 'SAP-' . rand(10000, 99999),
                     'category' => $category,
-                    'group' => $group,
+
                     'type' => $type,
                     'description' => 'Standard ' . $itemName . ' for ' . $group,
                     'purchase_date' => now()->subDays(rand(1, 700)),
