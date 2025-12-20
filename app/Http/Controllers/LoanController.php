@@ -62,7 +62,8 @@ class LoanController extends Controller
         // Handle borrowing logic
          $request->validate([
             'asset_id' => 'required|exists:assets,id',
-            'user_id' => 'required|exists:users,id',
+            'borrower_name' => 'required|string|max:255',
+            'borrower_position' => 'required|string|max:255',
             'loan_date' => 'required|date',
             'notes' => 'nullable|string',
             'amount' => [
@@ -82,7 +83,9 @@ class LoanController extends Controller
 
         $loan = \App\Models\AssetLoan::create([
             'asset_id' => $request->asset_id,
-            'user_id' => $request->user_id,
+            'user_id' => null,
+            'borrower_name' => $request->borrower_name,
+            'borrower_position' => $request->borrower_position,
             'loan_date' => $request->loan_date,
             'status' => $status,
             'notes' => $request->notes,
@@ -94,7 +97,7 @@ class LoanController extends Controller
             'asset_loan_id' => $loan->id,
             'user_id' => \Illuminate\Support\Facades\Auth::id(),
             'action' => 'created',
-            'description' => 'Loan request submitted with amount: ' . $request->amount,
+            'description' => 'Loan request submitted for ' . $request->borrower_name,
         ]);
 
         $msg = $status === 'pending' ? 'Loan request submitted successfully.' : 'Asset successfully loaned.';

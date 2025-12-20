@@ -13,7 +13,7 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
     <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 relative overflow-hidden group hover:shadow-lg transition-all duration-300">
         <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-            <i class="fas fa-boxes text-6xl text-blue-900"></i>
+            <i class="fas fa-boxes text-6xl text-bl ue-900"></i>
         </div>
         <h3 class="text-gray-500 font-semibold uppercase tracking-wider text-xs mb-1">Total Daftar Aset</h3>
         <p class="text-4xl font-extrabold text-[#0A1A32]">{{ $summary['total_assets'] ?? 0 }}</p>

@@ -36,28 +36,20 @@
                     </div>
                 </div>
 
-                <!-- Employee Selection -->
-                <div>
-                    <label for="user_id" class="block text-sm font-semibold text-gray-700 mb-2">Pilih Karyawan <span class="text-red-500">*</span></label>
-                    <div class="relative">
-                        <select name="user_id" id="user_id" required onchange="updateUserInfo(this)" class="w-full pl-4 pr-10 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 transition-colors text-gray-700 appearance-none bg-white">
-                            <option value="" disabled selected>Pilih karyawan...</option>
-                            @foreach($users as $user)
-                                <option value="{{ $user->id }}" data-image="{{ $user->image ? Storage::url($user->image) : '' }}" data-position="{{ $user->position ?? '-' }}" data-name="{{ $user->name }}">{{ $user->name }}</option>
-                            @endforeach
-                        </select>
-                        <i class="fas fa-chevron-down absolute right-4 top-4 text-gray-400 pointer-events-none"></i>
-                    </div>
-
-                    <!-- Selected User Info Preview -->
-                    <div id="userInfo" class="mt-4 hidden p-4 bg-blue-50 rounded-xl border border-blue-100 flex items-center gap-4 animate-fade-in-down">
-                        <div class="h-16 w-16 rounded-full bg-white border-2 border-white shadow-sm overflow-hidden flex-shrink-0">
-                            <img id="userImage" src="" alt="User" class="w-full h-full object-cover hidden">
-                            <div id="userInitials" class="w-full h-full flex items-center justify-center bg-blue-100 text-blue-600 font-bold text-xl">U</div>
+                <!-- Employee Information -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="borrower_name" class="block text-sm font-semibold text-gray-700 mb-2">Nama Peminjam <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <i class="fas fa-user absolute left-4 top-3.5 text-gray-400"></i>
+                            <input type="text" name="borrower_name" id="borrower_name" required class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 transition-colors text-gray-700" placeholder="Nama Lengkap">
                         </div>
-                        <div>
-                            <p class="text-sm font-bold text-gray-800" id="userName">User Name</p>
-                            <p class="text-xs text-gray-500 uppercase tracking-wide font-semibold mt-0.5" id="userPosition">Position</p>
+                    </div>
+                    <div>
+                        <label for="borrower_position" class="block text-sm font-semibold text-gray-700 mb-2">Jabatan <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <i class="fas fa-id-card absolute left-4 top-3.5 text-gray-400"></i>
+                            <input type="text" name="borrower_position" id="borrower_position" required class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 transition-colors text-gray-700" placeholder="Jabatan">
                         </div>
                     </div>
                 </div>
@@ -127,36 +119,7 @@
         }
     }
 
-    function updateUserInfo(select) {
-        const option = select.options[select.selectedIndex];
-        const image = option.getAttribute('data-image');
-        const position = option.getAttribute('data-position');
-        const name = option.getAttribute('data-name');
-        
-        const userInfo = document.getElementById('userInfo');
-        const userImage = document.getElementById('userImage');
-        const userInitials = document.getElementById('userInitials');
-        const userName = document.getElementById('userName');
-        const userPosition = document.getElementById('userPosition');
-        
-        if (select.value) {
-            userInfo.classList.remove('hidden');
-            userName.textContent = name;
-            userPosition.textContent = position;
-            
-            if (image) {
-                userImage.src = image;
-                userImage.classList.remove('hidden');
-                userInitials.classList.add('hidden');
-            } else {
-                userImage.classList.add('hidden');
-                userInitials.classList.remove('hidden');
-                userInitials.textContent = name.charAt(0);
-            }
-        } else {
-            userInfo.classList.add('hidden');
-        }
-    }
+
 </script>
 @endsection
 @endsection

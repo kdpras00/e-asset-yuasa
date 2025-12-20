@@ -98,12 +98,12 @@
                 <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-6 pb-2 border-b border-gray-50">Info Peminjam</h3>
                 <div class="flex items-center gap-4">
                      <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 font-bold text-xl">
-                        {{ substr($loan->user->name, 0, 1) }}
+                        {{ substr($loan->user ? $loan->user->name : $loan->borrower_name, 0, 1) }}
                     </div>
                     <div>
-                        <p class="font-bold text-gray-800 text-lg">{{ $loan->user->name }}</p>
-                        <p class="text-sm text-gray-500">{{ $loan->user->email }}</p>
-                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wide">{{ $loan->user->role }}</p>
+                        <p class="font-bold text-gray-800 text-lg">{{ $loan->user ? $loan->user->name : $loan->borrower_name }}</p>
+                        <p class="text-sm text-gray-500">{{ $loan->user ? $loan->user->email : 'Manual Entry' }}</p>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-wide">{{ $loan->user ? $loan->user->role : ($loan->borrower_position ?? '-') }}</p>
                     </div>
                 </div>
             </div>

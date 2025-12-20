@@ -44,11 +44,11 @@
                         <td class="px-6 py-4">
                             <div class="flex items-center gap-3">
                                 <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-500">
-                                    {{ substr($loan->user->name, 0, 1) }}
+                                    {{ substr($loan->user ? $loan->user->name : $loan->borrower_name, 0, 1) }}
                                 </div>
                                 <div>
-                                    <p class="font-semibold text-gray-800">{{ $loan->user->name }}</p>
-                                    <p class="text-xs text-gray-400">{{ $loan->user->role }}</p>
+                                    <p class="font-semibold text-gray-800">{{ $loan->user ? $loan->user->name : $loan->borrower_name }}</p>
+                                    <p class="text-xs text-gray-400">{{ $loan->user ? $loan->user->role : ($loan->borrower_position ?? '-') }}</p>
                                 </div>
                             </div>
                         </td>
