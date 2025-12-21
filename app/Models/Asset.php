@@ -34,6 +34,34 @@ class Asset extends Model
     }
 
     /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::creating(function ($asset) {
+            if (empty($asset->sap_code)) {
+                $asset->sap_code = self::generateUniqueSapCode();
+            }
+        });
+    }
+
+    /**
+     * Generate a unique SAP Code.
+     * 
+     * @return string
+     */
+    protected static function generateUniqueSapCode()
+    {
+        do {
+            $code = 'SAP-' . mt_rand(100000, 999999);
+        } while (self::where('sap_code', $code)->exists());
+
+        return $code;
+    }
+
+    /**
      * Retrieve the model for a bound value.
      *
      * @param  mixed  $value

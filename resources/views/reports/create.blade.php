@@ -61,15 +61,14 @@
                             <div class="flex flex-col items-center justify-center pt-5 pb-6" id="upload-placeholder">
                                 <i class="fas fa-file-upload text-3xl text-gray-400 group-hover:text-blue-500 transition-colors mb-3"></i>
                                 <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span></p>
-                                <p class="text-xs text-gray-400">PDF, PNG, JPG (MAX. 2MB)</p>
+                                <p class="text-xs text-gray-400">PDF, Excel, Word (MAX. 2MB)</p>
                             </div>
                             <!-- Filename/Image preview -->
                             <div id="preview-container" class="hidden absolute inset-0 bg-white flex flex-col items-center justify-center text-blue-700 font-medium p-4 text-center z-10 w-full h-full">
-                                <img id="img-preview" class="hidden max-h-32 object-contain mb-2 rounded shadow-sm">
                                 <p id="file-name" class="text-sm truncate w-full px-4"></p>
                                 <button type="button" id="remove-file" class="mt-2 text-xs text-red-500 hover:text-red-700 font-bold underline z-20">Remove</button>
                             </div>
-                            <input id="dropzone-file" name="document" type="file" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-0" accept=".pdf,.jpg,.jpeg,.png" required />
+                            <input id="dropzone-file" name="document" type="file" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-0" accept=".pdf,.doc,.docx,.xls,.xlsx" required />
                         </label>
                     </div>
                     @error('document')
@@ -78,7 +77,6 @@
                     <script>
                         const dropzoneInput = document.getElementById('dropzone-file');
                         const previewContainer = document.getElementById('preview-container');
-                        const imgPreview = document.getElementById('img-preview');
                         const fileNameDisplay = document.getElementById('file-name');
                         const placeholder = document.getElementById('upload-placeholder');
                         const removeBtn = document.getElementById('remove-file');
@@ -89,18 +87,6 @@
                                 fileNameDisplay.textContent = file.name;
                                 previewContainer.classList.remove('hidden');
                                 placeholder.classList.add('hidden'); // Hide the upload prompts
-
-                                if (file.type.match('image.*')) {
-                                    const reader = new FileReader();
-                                    reader.onload = function(e) {
-                                        imgPreview.src = e.target.result;
-                                        imgPreview.classList.remove('hidden');
-                                    }
-                                    reader.readAsDataURL(file);
-                                } else {
-                                    imgPreview.classList.add('hidden');
-                                    imgPreview.src = '';
-                                }
                             }
                         });
 

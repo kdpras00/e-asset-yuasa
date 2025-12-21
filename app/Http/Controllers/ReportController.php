@@ -45,7 +45,7 @@ class ReportController extends Controller
         $request->validate([
             'asset_id' => 'required|exists:assets,id',
             'type' => 'required',
-            'document' => 'required|file|mimes:pdf,jpg,png,jpeg|max:2048'
+            'document' => 'required|file|mimes:pdf,doc,docx,xls,xlsx|max:2048'
         ]);
 
         if ($request->hasFile('document')) {

@@ -129,7 +129,7 @@ class AssetController extends Controller
         $request->validate([
             'name' => 'required',
             'code' => 'required|unique:assets',
-            'sap_code' => 'nullable|unique:assets',
+            // 'sap_code' => 'nullable|unique:assets', // Auto-generated
             'category' => 'required',
             // 'group' => 'required|string', // Removed
             'department' => 'nullable',
