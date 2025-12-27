@@ -116,7 +116,7 @@
                 <!-- ROLE: Pimpinan -->
                 <!-- ROLE: Kopf Department (Pimpinan) -->
                 @if(Auth::user()->role == 'pimpinan')
-                    <p class="menu-link-text px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2" x-show="sidebarOpen">Department Head</p>
+                    <p class="menu-link-text px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2" x-show="sidebarOpen">Kepala Divisi</p>
                     
                     <a href="{{ route('assets.index') }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->routeIs('assets.index') ? 'active text-white bg-white/10' : '' }}">
                         <span class="w-8 flex justify-center"><i class="fas fa-search text-lg group-hover:text-blue-400 transition-colors"></i></span>

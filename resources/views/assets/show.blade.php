@@ -58,7 +58,7 @@
                             'Kategori Asset' => $asset->category,
                             // Group Removed
                             // Sub Grup Removed 
-                            'Department' => $asset->department ?? '-',
+                            'Divisi' => $asset->department ?? '-',
                             'Section' => $asset->section ?? '-',
                             'Email Pengguna' => Auth::user()->email,
                             'Catatan Asset' => $asset->description,

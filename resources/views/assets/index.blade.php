@@ -37,7 +37,7 @@
                 <tr class="bg-gray-50 text-gray-600 border-b border-gray-200">
                     <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Info Aset</th>
                     <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Kode SAP</th>
-                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Departemen</th>
+                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Divisi</th>
                     <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Status</th>
                     <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Qty</th>
                     <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Stok</th>

@@ -29,9 +29,7 @@ class AssetSeeder extends Seeder
             'Peralatan Elektronik' => [
                 'Komputer / PC', 'Laptop', 'Printer', 'Scanner', 'Mesin fotokopi', 'Telepon kantor', 'Proyektor'
             ],
-            'Perlengkapan ATK' => [
-                'Kertas (HVS, folio, dll.)', 'Pulpen, pensil', 'Spidol, stabilo', 'Map, ordner', 'Stapler & isi staples', 'Paper clip'
-            ],
+
             'Peralatan Pendukung' => [
                 'AC', 'Kipas angin', 'Jam dinding', 'Dispenser air', 'CCTV'
             ],
@@ -55,7 +53,7 @@ class AssetSeeder extends Seeder
 
         foreach ($data as $category => $items) {
             foreach ($items as $index => $itemName) {
-                $type = ($category == 'Perlengkapan ATK') ? 'consumable' : 'fixed';
+                $type = 'fixed';
                 $qty = ($type == 'consumable') ? rand(50, 200) : 1;
                 
                 // Determine valid locations based on Category and Item Name
@@ -73,9 +71,7 @@ class AssetSeeder extends Seeder
                         // PC, Laptop, Printer etc.
                         $validLocations = ['Ruang Kerja Staff', 'Ruang Manager', 'Resepsionis', 'Ruang Server'];
                     }
-                } elseif ($category == 'Perlengkapan ATK') {
-                    // ATK mostly in staff rooms or storage
-                    $validLocations = ['Ruang Kerja Staff', 'Ruang Arsip', 'Distribusi'];
+
                 } elseif ($category == 'Peralatan Pendukung') {
                     if (str_contains(strtolower($itemName), 'dispenser') || str_contains(strtolower($itemName), 'kopi')) {
                         $validLocations = ['Pantry Kantor', 'Ruang Meeting', 'Lobby Utama'];
