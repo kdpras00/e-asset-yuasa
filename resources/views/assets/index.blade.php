@@ -13,7 +13,7 @@
                 <input type="text" name="search" placeholder="Cari aset..." value="{{ request('search') }}" class="w-full pl-10 pr-4 py-2 rounded-xl border-none shadow-sm focus:ring-2 focus:ring-blue-900 bg-white text-gray-600 transition-shadow">
             </form>
             
-            @if(Auth::user()->role != 'pimpinan')
+            @if(!in_array(Auth::user()->role, ['pimpinan', 'hrd']))
             <a href="{{ route('assets.create') }}" class="bg-[#9E3E3E] hover:bg-[#7a2e2e] text-white font-bold py-2 px-6 rounded-xl shadow-lg flex items-center transition-transform hover:-translate-y-0.5">
                 <i class="fas fa-plus mr-2"></i> Tambah Baru
             </a>
@@ -98,6 +98,8 @@
                             <a href="{{ route('assets.show', $asset->id) }}" class="text-gray-400 hover:text-blue-600 transition-colors" title="View">
                                 <i class="fas fa-eye text-lg"></i>
                             </a>
+                            
+                            @if(Auth::user()->role != 'hrd')
                             <a href="{{ route('assets.edit', $asset->id) }}" class="text-gray-400 hover:text-green-600 transition-colors" title="Edit">
                                 <i class="fas fa-edit text-lg"></i>
                             </a>
@@ -108,6 +110,7 @@
                                 @csrf
                                 @method('DELETE')
                             </form>
+                            @endif
                         </div>
                     </td>
                     @endif

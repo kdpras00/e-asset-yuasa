@@ -93,10 +93,7 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('loans.index') }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->routeIs('loans.index') ? 'active text-white bg-white/10' : '' }}">
-                        <span class="w-8 flex justify-center"><i class="fas fa-file-signature text-lg group-hover:text-yellow-400 transition-colors"></i></span>
-                        <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen"> Pengajuan Barang</span>
-                    </a>
+
 
                     <!-- <a href="{{ route('loans.index', ['history' => 'true']) }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->fullUrlIs(route('loans.index', ['history' => 'true'])) ? 'active text-white bg-white/10' : '' }}">
                          <span class="w-8 flex justify-center"><i class="fas fa-history text-lg group-hover:text-blue-400 transition-colors"></i></span>
@@ -131,10 +128,7 @@
                          <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen"> Dokumen</span>
                     </a>
 
-                    <a href="{{ route('loans.index') }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->routeIs('loans.index') ? 'active text-white bg-white/10' : '' }}">
-                        <span class="w-8 flex justify-center"><i class="fas fa-tasks text-lg group-hover:text-blue-400 transition-colors"></i></span>
-                        <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen"> Pengajuan Barang</span>
-                    </a>
+
 
                     <!-- <a href="{{ route('loans.index', ['history' => 'true']) }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->fullUrlIs(route('loans.index', ['history' => 'true'])) ? 'active text-white bg-white/10' : '' }}">
                         <span class="w-8 flex justify-center"><i class="fas fa-history text-lg group-hover:text-purple-400 transition-colors"></i></span>
@@ -147,6 +141,21 @@
                     </a>
                     
                   
+                @endif
+
+                <!-- ROLE: HRD -->
+                @if(Auth::user()->role == 'hrd')
+                    <p class="menu-link-text px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2" x-show="sidebarOpen">HRD Manager</p>
+                    
+                    <a href="{{ route('assets.index') }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->routeIs('assets.index') ? 'active text-white bg-white/10' : '' }}">
+                        <span class="w-8 flex justify-center"><i class="fas fa-search text-lg group-hover:text-blue-400 transition-colors"></i></span>
+                        <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen"> Asset</span>
+                    </a>
+
+                    <a href="{{ route('reports.summary') }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->routeIs('reports.summary') ? 'active text-white bg-white/10' : '' }}">
+                        <span class="w-8 flex justify-center"><i class="fas fa-chart-line text-lg group-hover:text-green-400 transition-colors"></i></span>
+                        <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Laporan</span>
+                    </a>
                 @endif
 
             </nav>

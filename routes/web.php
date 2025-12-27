@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('assets', AssetController::class);
 
     Route::get('/reports/summary', [ReportController::class, 'summary'])->name('reports.summary');
+    Route::get('/reports/export', [ReportController::class, 'export'])->name('reports.export');
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
     
     // Centralized Document Upload

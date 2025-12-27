@@ -6,6 +6,9 @@ use App\Models\Document;
 use App\Models\Asset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\AssetsExport;
 
 class ReportController extends Controller
 {
@@ -95,5 +98,19 @@ class ReportController extends Controller
             'assetsByCategory',
             'recentDocuments'
         ));
+    }
+
+    public function export(Request $request)
+    {
+        $format = $request->get('format', 'pdf');
+        
+        if ($format === 'excel') {
+            return Excel::download(new AssetsExport, 'assets-report.xlsx');
+        }
+
+        // PDF
+        $assets = Asset::all();
+        $pdf = Pdf::loadView('reports.pdf', compact('assets'));
+        return $pdf->download('assets-report.pdf');
     }
 }

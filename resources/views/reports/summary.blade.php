@@ -1,9 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="mb-8">
-    <h1 class="text-3xl font-bold text-gray-800 tracking-tight">Ringkasan Laporan</h1>
-    <p class="text-gray-500 mt-1">Gambaran umum distribusi aset dan aktivitas.</p>
+<div class="mb-8 flex items-center justify-between">
+    <div>
+        <h1 class="text-3xl font-bold text-gray-800 tracking-tight">Ringkasan Laporan</h1>
+        <p class="text-gray-500 mt-1">Gambaran umum distribusi aset dan aktivitas.</p>
+    </div>
+    <div class="flex gap-3">
+        <a href="{{ route('reports.export', ['format' => 'pdf']) }}" class="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors shadow-sm">
+            <i class="fas fa-file-pdf"></i>
+            <span class="font-medium text-sm">Export PDF</span>
+        </a>
+        <a href="{{ route('reports.export', ['format' => 'excel']) }}" class="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors shadow-sm">
+            <i class="fas fa-file-excel"></i>
+            <span class="font-medium text-sm">Export Excel</span>
+        </a>
+    </div>
 </div>
 
 <!-- Stats Breakdown -->

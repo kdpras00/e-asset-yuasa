@@ -30,5 +30,14 @@ class UserSeeder extends Seeder
                 'role' => 'pimpinan',
             ]
         );
+
+         User::updateOrCreate(
+            ['email' => 'hrd@yuasa.com'],
+            [
+                'name' => 'HRD',
+                'password' => Hash::make('password'),
+                'role' => 'hrd',
+            ]
+        );
     }
 }
