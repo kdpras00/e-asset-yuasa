@@ -16,7 +16,8 @@ class MaintenanceController extends Controller
 
     public function create()
     {
-        $assets = Asset::where('status', 'active')->orderBy('name')->get(); // Only active assets usually need maintenance
+        // Include 'active', 'maintenance', 'baik' (legacy), 'rusak' (legacy)
+        $assets = Asset::whereIn('status', ['active', 'maintenance', 'baik', 'rusak'])->orderBy('name')->get(); 
         return view('maintenance.create', compact('assets'));
     }
 
@@ -25,28 +26,30 @@ class MaintenanceController extends Controller
         $request->validate([
             'asset_id' => 'required|exists:assets,id',
             'description' => 'required',
-            'start_date' => 'required|date',
-            'status' => 'required|in:pending,completed',
-            'cost' => 'nullable|numeric|min:0',
+            // 'start_date' => 'required|date', // Removed as we set it auto
+            // 'status' => 'required', // Default pending
+            'cost' => 'required|numeric|min:0',
+            'image' => 'required|image|max:2048',
+            'room' => 'required',
+            'warranty_status' => 'required',
         ]);
 
-        AssetMaintenance::create($request->all());
-
-        // Update asset status to maintenance if pending
-        if ($request->status == 'pending') {
-             $asset = Asset::find($request->asset_id);
-             $asset->update(['status' => 'maintenance']);
+        $data = $request->all();
+        $data['start_date'] = now();
+        $data['status'] = 'pending'; // Default
+        
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('maintenance', 'public');
         }
 
-        // If completed directly (unlikely but possible), should we set to active? 
-        // Or maintenance records are just logs? 
-        // Let's assume inputting a 'completed' record means it was done.
-        if ($request->status == 'completed') {
-             $asset = Asset::find($request->asset_id);
-             $asset->update(['status' => 'active']);
-        }
+        AssetMaintenance::create($data);
 
-        return redirect()->route('maintenance.index')->with('success', 'Maintenance record created.');
+        // Update asset status to maintenance immediately? Or wait for approval?
+        // Let's set to maintenance so it's not available.
+        $asset = Asset::find($request->asset_id);
+        $asset->update(['status' => 'maintenance']);
+
+        return redirect()->route('maintenance.index')->with('success', 'Pengajuan perbaikan berhasil dikirim.');
     }
 
     public function edit(AssetMaintenance $maintenance)
@@ -54,22 +57,35 @@ class MaintenanceController extends Controller
         return view('maintenance.edit', compact('maintenance'));
     }
 
+    public function approve(AssetMaintenance $maintenance)
+    {
+        $maintenance->update(['status' => 'approved']);
+        return redirect()->back()->with('success', 'Pengajuan perbaikan disetujui.');
+    }
+
+    public function reject(AssetMaintenance $maintenance)
+    {
+        $maintenance->update(['status' => 'rejected']);
+        $maintenance->asset->update(['status' => 'active']); // Revert asset to active
+        return redirect()->back()->with('success', 'Pengajuan perbaikan ditolak.');
+    }
+
+    public function complete(AssetMaintenance $maintenance)
+    {
+        $maintenance->update(['status' => 'completed', 'completion_date' => now()]);
+        $maintenance->asset->update(['status' => 'active']);
+        return redirect()->back()->with('success', 'Perbaikan selesai.');
+    }
+
     public function update(Request $request, AssetMaintenance $maintenance)
     {
+        // Keep generic update for editing details
         $request->validate([
             'description' => 'required',
-            'start_date' => 'required|date',
-            'status' => 'required|in:pending,completed',
             'cost' => 'nullable|numeric|min:0',
         ]);
-
         $maintenance->update($request->all());
-
-        if ($request->status == 'completed') {
-             $maintenance->asset->update(['status' => 'active']);
-             $maintenance->update(['completion_date' => now()]);
-        }
-
-        return redirect()->route('maintenance.index')->with('success', 'Maintenance updated.');
+        
+        return redirect()->route('maintenance.index')->with('success', 'Data perbaikan diperbarui.');
     }
 }

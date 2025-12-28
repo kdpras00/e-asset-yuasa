@@ -55,6 +55,13 @@ class Asset extends Model
             if (empty($asset->sap_code)) {
                 $asset->sap_code = self::generateUniqueSapCode();
             }
+            if (empty($asset->code)) {
+                $asset->code = self::generateUniqueCode();
+            }
+            // Set initial status to pending for approval workflow
+            if (empty($asset->status)) {
+                $asset->status = 'pending';
+            }
         });
     }
 
@@ -68,6 +75,21 @@ class Asset extends Model
         do {
             $code = 'SAP-' . mt_rand(100000, 999999);
         } while (self::where('sap_code', $code)->exists());
+
+        return $code;
+    }
+
+    /**
+     * Generate a unique Asset Code.
+     * 
+     * @return string
+     */
+    protected static function generateUniqueCode()
+    {
+        do {
+            // AST-YYYYMMDD-XXXX
+            $code = 'AST-' . date('Ymd') . '-' . mt_rand(1000, 9999);
+        } while (self::where('code', $code)->exists());
 
         return $code;
     }

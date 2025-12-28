@@ -35,6 +35,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reports/summary', [ReportController::class, 'summary'])->name('reports.summary');
     Route::get('/reports/export', [ReportController::class, 'export'])->name('reports.export');
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports/purchase', [ReportController::class, 'purchase'])->name('reports.purchase');
+    Route::post('/reports/purchase/{asset}/approve', [ReportController::class, 'approvePurchase'])->name('reports.purchase.approve');
+    Route::post('/reports/purchase/{asset}/reject', [ReportController::class, 'rejectPurchase'])->name('reports.purchase.reject');
+
+    Route::post('/reports/maintenance/{maintenance}/approve', [\App\Http\Controllers\MaintenanceController::class, 'approve'])->name('reports.maintenance.approve');
+    Route::post('/reports/maintenance/{maintenance}/reject', [\App\Http\Controllers\MaintenanceController::class, 'reject'])->name('reports.maintenance.reject');
+    Route::post('/reports/maintenance/{maintenance}/complete', [\App\Http\Controllers\MaintenanceController::class, 'complete'])->name('reports.maintenance.complete');
+
+    Route::post('/reports/disposal/{id}/approve', [\App\Http\Controllers\DisposalController::class, 'approve'])->name('reports.disposal.approve');
+    Route::post('/reports/disposal/{id}/reject', [\App\Http\Controllers\DisposalController::class, 'reject'])->name('reports.disposal.reject');
     
     // Centralized Document Upload
     Route::get('/documents/upload', [ReportController::class, 'create'])->name('documents.create');

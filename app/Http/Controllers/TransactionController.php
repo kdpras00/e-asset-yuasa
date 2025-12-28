@@ -51,10 +51,14 @@ class TransactionController extends Controller
             // Default fields
             'quantity' => 'required|integer|min:1',
             'category' => 'required', // Needed for creating asset, maybe hidden or default
-            'status' => 'required',
+            'code' => 'nullable|unique:assets,code', // Validation for unique code
+            // 'status' => 'required', // Removed, we force pending
         ]);
 
         $data = $request->all();
+        // If code is empty, generate it? The model does this on 'booted'.
+        // But if user provides it, it must be unique.
+        $data['status'] = 'pending'; // Force pending for approval
 
         // Handle File Uploads
         if ($request->hasFile('image')) {
@@ -70,7 +74,7 @@ class TransactionController extends Controller
         
         $asset = Asset::create($data);
 
-        return redirect()->route('transactions.purchase')->with('success', 'Aset baru berhasil ditambahkan ke Daftar Aset.');
+        return redirect()->route('transactions.purchase')->with('success', 'Aset baru berhasil diajukan. Menunggu persetujuan pimpinan.');
     }
 
     /**

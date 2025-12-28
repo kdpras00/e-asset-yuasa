@@ -19,6 +19,25 @@ class ReportController extends Controller
         return view('reports.index', compact('documents'));
     }
 
+    public function purchase()
+    {
+        $assets = Asset::orderBy('created_at', 'desc')->paginate(10);
+        return view('reports.purchase', compact('assets'));
+    }
+
+    public function approvePurchase(Asset $asset)
+    {
+        $asset->update(['status' => 'active']);
+        return redirect()->back()->with('success', 'Pembelian aset disetujui. Aset status: Aktif.');
+    }
+
+    public function rejectPurchase(Asset $asset)
+    {
+        // Option: Delete or Mark Rejected. Usually mark rejected for history.
+        $asset->update(['status' => 'rejected']);
+        return redirect()->back()->with('success', 'Pembelian aset ditolak.');
+    }
+
     public function show($id)
     {
         $document = Document::with('asset')->findOrFail($id);
