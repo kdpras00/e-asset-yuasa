@@ -65,6 +65,47 @@
     </div>
 </div>
 
+</div>
+
+<!-- Report Navigation Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <a href="{{ route('assets.index') }}" class="group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+        <div class="flex items-center gap-4">
+            <div class="p-3 bg-blue-50 text-blue-600 rounded-xl group-hover:bg-blue-100 transition-colors">
+                <i class="fas fa-boxes text-xl"></i>
+            </div>
+            <div>
+                <h3 class="font-bold text-gray-800 group-hover:text-blue-600 transition-colors">Data Aset List</h3>
+                <p class="text-sm text-gray-500">Lihat seluruh data aset aktif</p>
+            </div>
+        </div>
+    </a>
+
+    <a href="{{ route('maintenance.index') }}" class="group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+        <div class="flex items-center gap-4">
+            <div class="p-3 bg-yellow-50 text-yellow-600 rounded-xl group-hover:bg-yellow-100 transition-colors">
+                <i class="fas fa-tools text-xl"></i>
+            </div>
+            <div>
+                <h3 class="font-bold text-gray-800 group-hover:text-yellow-600 transition-colors">Laporan Perbaikan</h3>
+                <p class="text-sm text-gray-500">Data aset dalam perbaikan</p>
+            </div>
+        </div>
+    </a>
+
+    <a href="{{ route('disposal.index') }}" class="group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+        <div class="flex items-center gap-4">
+            <div class="p-3 bg-red-50 text-red-600 rounded-xl group-hover:bg-red-100 transition-colors">
+                <i class="fas fa-trash-alt text-xl"></i>
+            </div>
+            <div>
+                <h3 class="font-bold text-gray-800 group-hover:text-red-600 transition-colors">Laporan Pemusnahan</h3>
+                <p class="text-sm text-gray-500">Data aset yang dimusnahkan</p>
+            </div>
+        </div>
+    </a>
+</div>
+
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     <!-- Category Chart -->
     <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">

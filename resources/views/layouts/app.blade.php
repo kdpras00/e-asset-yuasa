@@ -100,15 +100,28 @@
                         <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Riwayat Persetujuan</span>
                     </a> -->
 
-                    <a href="{{ route('reports.index') }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->routeIs('reports.index') ? 'active text-white bg-white/10' : '' }}">
-                        <span class="w-8 flex justify-center"><i class="fas fa-file-contract text-lg group-hover:text-green-400 transition-colors"></i></span>
-                        <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Documents</span>
-                    </a>
-                    
-                    <a href="{{ route('reports.summary') }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->routeIs('reports.summary') ? 'active text-white bg-white/10' : '' }}">
-                        <span class="w-8 flex justify-center"><i class="fas fa-chart-pie text-lg group-hover:text-green-400 transition-colors"></i></span>
-                        <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Laporan</span>
-                    </a>
+                    <!-- Laporan Dropdown -->
+                    <div x-data="{ open: {{ request()->routeIs('transactions.*') ? 'true' : 'false' }} }">
+                        <button @click="open = !open" class="w-full sidebar-link group flex items-center justify-between px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->routeIs('transactions.*') ? 'active text-white bg-white/10' : '' }}">
+                            <div class="flex items-center">
+                                <span class="w-8 flex justify-center"><i class="fas fa-file-invoice text-lg group-hover:text-green-400 transition-colors"></i></span>
+                                <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Laporan</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-200" :class="{ 'rotate-180': open }" x-show="sidebarOpen"></i>
+                        </button>
+                        
+                        <div x-show="open && sidebarOpen" x-collapse class="pl-12 pr-4 space-y-1 mt-1">
+                            <a href="{{ route('transactions.purchase') }}" class="block py-2 text-sm text-gray-400 hover:text-white {{ request()->routeIs('transactions.purchase') ? 'text-white font-bold' : '' }}">
+                                Pembelian (Baru)
+                            </a>
+                            <a href="{{ route('transactions.maintenance') }}" class="block py-2 text-sm text-gray-400 hover:text-white {{ request()->routeIs('transactions.maintenance') ? 'text-white font-bold' : '' }}">
+                                Perbaikan Aset
+                            </a>
+                            <a href="{{ route('transactions.disposal') }}" class="block py-2 text-sm text-gray-400 hover:text-white {{ request()->routeIs('transactions.disposal') ? 'text-white font-bold' : '' }}">
+                                Pemusnahan Aset
+                            </a>
+                        </div>
+                    </div>
                 @endif
 
                 <!-- Inventory and Karyawan roles removed -->
@@ -135,10 +148,28 @@
                         <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Riwayat Persetujuan</span>
                     </a> -->
 
-                    <a href="{{ route('reports.summary') }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->routeIs('reports.summary') ? 'active text-white bg-white/10' : '' }}">
-                        <span class="w-8 flex justify-center"><i class="fas fa-chart-line text-lg group-hover:text-green-400 transition-colors"></i></span>
-                        <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Laporan</span>
-                    </a>
+                    <!-- Laporan Dropdown (Pimpinan) -->
+                    <div x-data="{ open: {{ request()->routeIs(['reports.*', 'maintenance.*', 'disposal.*']) ? 'true' : 'false' }} }">
+                        <button @click="open = !open" class="w-full sidebar-link group flex items-center justify-between px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->routeIs(['reports.*', 'maintenance.*', 'disposal.*']) ? 'active text-white bg-white/10' : '' }}">
+                            <div class="flex items-center">
+                                <span class="w-8 flex justify-center"><i class="fas fa-chart-line text-lg group-hover:text-green-400 transition-colors"></i></span>
+                                <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Laporan</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-200" :class="{ 'rotate-180': open }" x-show="sidebarOpen"></i>
+                        </button>
+                        
+                        <div x-show="open && sidebarOpen" x-collapse class="pl-12 pr-4 space-y-1 mt-1">
+                            <a href="{{ route('assets.index') }}" class="block py-2 text-sm text-gray-400 hover:text-white {{ request()->routeIs('assets.index') ? 'text-white font-bold' : '' }}">
+                                Riwayat Pembelian
+                            </a>
+                            <a href="{{ route('maintenance.index') }}" class="block py-2 text-sm text-gray-400 hover:text-white {{ request()->routeIs('maintenance.*') ? 'text-white font-bold' : '' }}">
+                                Riwayat Perbaikan
+                            </a>
+                            <a href="{{ route('disposal.index') }}" class="block py-2 text-sm text-gray-400 hover:text-white {{ request()->routeIs('disposal.*') ? 'text-white font-bold' : '' }}">
+                                Riwayat Pemusnahan
+                            </a>
+                        </div>
+                    </div>
                     
                   
                 @endif

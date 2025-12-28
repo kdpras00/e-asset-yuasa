@@ -13,8 +13,29 @@
                 <input type="text" name="search" placeholder="Cari aset..." value="{{ request('search') }}" class="w-full pl-10 pr-4 py-2 rounded-xl border-none shadow-sm focus:ring-2 focus:ring-blue-900 bg-white text-gray-600 transition-shadow">
             </form>
             
+            <!-- Export Button (All Roles) -->
+            <div x-data="{ open: false }" class="relative">
+                <button @click="open = !open" @click.away="open = false" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-xl shadow-lg flex items-center transition-transform hover:-translate-y-0.5">
+                    <i class="fas fa-file-export mr-2"></i> Export
+                    <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                </button>
+                <div x-show="open" class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl z-50 overflow-hidden border border-gray-100" x-cloak>
+                    <a href="{{ route('assets.index', ['export' => 'excel', 'type' => 'all']) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-green-600">
+                        <i class="fas fa-list mr-2"></i> Semua Data Aset
+                    </a>
+                    <a href="{{ route('assets.index', ['export' => 'excel', 'type' => 'maintenance']) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-yellow-600">
+                        <i class="fas fa-tools mr-2"></i> Data Perbaikan
+                    </a>
+                    <a href="{{ route('assets.index', ['export' => 'excel', 'type' => 'disposal']) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600">
+                        <i class="fas fa-trash-alt mr-2"></i> Data Pemusnahan
+                    </a>
+                </div>
+            </div>
+            
+
+
             @if(!in_array(Auth::user()->role, ['pimpinan', 'hrd']))
-            <a href="{{ route('assets.create') }}" class="bg-[#9E3E3E] hover:bg-[#7a2e2e] text-white font-bold py-2 px-6 rounded-xl shadow-lg flex items-center transition-transform hover:-translate-y-0.5">
+            <a href="{{ route('transactions.purchase') }}" class="bg-[#9E3E3E] hover:bg-[#7a2e2e] text-white font-bold py-2 px-6 rounded-xl shadow-lg flex items-center transition-transform hover:-translate-y-0.5">
                 <i class="fas fa-plus mr-2"></i> Tambah Baru
             </a>
             @endif

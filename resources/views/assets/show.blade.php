@@ -42,6 +42,15 @@
                     </div>
                 @endif
             </div>
+
+            @if($asset->warranty_proof)
+            <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Kartu Garansi / Bukti</h4>
+                <div class="bg-gray-50 p-2 rounded-lg border border-gray-200">
+                    <img src="{{ Storage::url($asset->warranty_proof) }}" alt="Warranty Proof" class="w-full h-auto rounded-lg cursor-pointer hover:opacity-90 transition-opacity" onclick="window.open(this.src, '_blank')">
+                </div>
+            </div>
+            @endif
         </div>
     </div>
 

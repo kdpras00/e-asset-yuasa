@@ -14,6 +14,20 @@ class AssetController extends Controller
      */
     public function index(Request $request)
     {
+        // Handle Export Request directly on Index
+        if ($request->has('export') && $request->export == 'excel') {
+             $type = $request->get('type', 'all'); // 'all', 'maintenance', 'disposal'
+             
+             switch ($type) {
+                case 'maintenance':
+                    return \Maatwebsite\Excel\Facades\Excel::download(new \App\Exports\MaintenanceExport, 'maintenance-report.xlsx');
+                case 'disposal':
+                    return \Maatwebsite\Excel\Facades\Excel::download(new \App\Exports\DisposalExport, 'disposal-report.xlsx');
+                default:
+                    return \Maatwebsite\Excel\Facades\Excel::download(new \App\Exports\AssetsExport, 'assets-report.xlsx');
+             }
+        }
+
         $query = Asset::query();
         
         if ($request->has('search')) {
@@ -37,20 +51,12 @@ class AssetController extends Controller
             });
         }
 
-        // Group filter removed
-
         if ($request->has('category')) {
             $query->where('category', $request->category);
         }
 
         if ($request->has('type')) {
             $query->where('type', $request->type);
-        } else {
-             // Default to showing all? Or maybe fixed only? 
-             // If user goes to "Asset List" usually implies fixed. But let's keep all for now or check current behavior.
-             // Actually, if I change the link to type=fixed, it handles it. 
-             // But if I go to just /assets, what should I see? 
-             // I'll leave it as is, showing all if no filter.
         }
 
         $assets = $query->paginate(10);

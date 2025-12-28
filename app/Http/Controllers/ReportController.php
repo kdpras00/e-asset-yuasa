@@ -103,12 +103,20 @@ class ReportController extends Controller
     public function export(Request $request)
     {
         $format = $request->get('format', 'pdf');
+        $type = $request->get('type', 'assets'); // assets, maintenance, disposal
         
         if ($format === 'excel') {
-            return Excel::download(new AssetsExport, 'assets-report.xlsx');
+            switch ($type) {
+                case 'maintenance':
+                    return Excel::download(new \App\Exports\MaintenanceExport, 'maintenance-report.xlsx');
+                case 'disposal':
+                    return Excel::download(new \App\Exports\DisposalExport, 'disposal-report.xlsx');
+                default:
+                    return Excel::download(new AssetsExport, 'assets-report.xlsx');
+            }
         }
 
-        // PDF
+        // PDF (Default to assets for now, or expand if needed)
         $assets = Asset::all();
         $pdf = Pdf::loadView('reports.pdf', compact('assets'));
         return $pdf->download('assets-report.pdf');

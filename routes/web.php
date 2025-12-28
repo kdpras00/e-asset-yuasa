@@ -50,5 +50,20 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/loans/{loan}/request-return', [\App\Http\Controllers\LoanController::class, 'requestReturn'])->name('loans.request_return');
     Route::post('/loans/{loan}/return', [\App\Http\Controllers\LoanController::class, 'returnAsset'])->name('loans.return');
     Route::resource('loans', \App\Http\Controllers\LoanController::class);
+
+    // Maintenance & Disposal
+    Route::resource('maintenance', \App\Http\Controllers\MaintenanceController::class);
+    Route::resource('disposal', \App\Http\Controllers\DisposalController::class);
+
+    // New Transaction Hub (Phase 2 - Separated Pages)
+    // Route::get('/transactions', [\App\Http\Controllers\TransactionController::class, 'index'])->name('transactions.index'); // Deprecated
+    
+    Route::get('/transactions/purchase', [\App\Http\Controllers\TransactionController::class, 'purchase'])->name('transactions.purchase');
+    Route::get('/transactions/maintenance', [\App\Http\Controllers\TransactionController::class, 'maintenance'])->name('transactions.maintenance');
+    Route::get('/transactions/disposal', [\App\Http\Controllers\TransactionController::class, 'disposal'])->name('transactions.disposal');
+
+    Route::post('/transactions/purchase', [\App\Http\Controllers\TransactionController::class, 'storePurchase'])->name('transactions.store.purchase');
+    Route::post('/transactions/maintenance', [\App\Http\Controllers\TransactionController::class, 'storeMaintenance'])->name('transactions.store.maintenance');
+    Route::post('/transactions/disposal', [\App\Http\Controllers\TransactionController::class, 'storeDisposal'])->name('transactions.store.disposal');
 });
 

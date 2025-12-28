@@ -24,6 +24,7 @@ class Asset extends Model
         'section',
         'pic',
         'image',
+        'warranty_proof',
         'status',
         'type',
     ];
@@ -31,6 +32,16 @@ class Asset extends Model
     public function documents()
     {
         return $this->hasMany(Document::class);
+    }
+
+    public function maintenances()
+    {
+        return $this->hasMany(AssetMaintenance::class);
+    }
+
+    public function disposals()
+    {
+        return $this->hasOne(AssetDisposal::class); // Usually an asset is disposed once
     }
 
     /**
