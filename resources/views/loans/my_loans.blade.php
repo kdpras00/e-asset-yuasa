@@ -29,13 +29,6 @@
                     <tr class="hover:bg-gray-50/50 transition-colors">
                         <td class="px-6 py-4">
                              <div class="flex items-center gap-3">
-                                @if($loan->asset->image)
-                                <img src="{{ Storage::url($loan->asset->image) }}" class="w-12 h-12 rounded-lg object-cover border border-gray-100">
-                                @else
-                                <div class="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400">
-                                    <i class="fas fa-box"></i>
-                                </div>
-                                @endif
                                 <div>
                                     <p class="font-bold text-gray-800">{{ $loan->asset->name }}</p>
                                     <p class="text-xs text-gray-400 font-mono">{{ $loan->asset->code }}</p>

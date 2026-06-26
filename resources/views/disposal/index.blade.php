@@ -9,7 +9,7 @@
         </div>
         
         @if(Auth::user()->role != 'hrd')
-        <a href="{{ route('disposal.create') }}" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg flex items-center transition-transform hover:-translate-y-0.5">
+        <a href="{{ route('disposal.create') }}" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl shadow-sm flex items-center transition-transform hover:-translate-y-0.5">
             <i class="fas fa-trash-alt mr-2"></i> Ajukan Pemusnahan
         </a>
         @endif

@@ -7,13 +7,13 @@
             <p class="text-gray-500 mt-1">Manage all asset-related documents and files.</p>
         </div>
         @if(Auth::user()->role != 'hrd')
-        <a href="{{ route('documents.create') }}" class="bg-[#0A1A32] text-white px-6 py-2.5 rounded-xl shadow-lg hover:shadow-xl hover:bg-[#152a4d] font-bold transition-all flex items-center">
+        <a href="{{ route('documents.create') }}" class="bg-[#0A1A32] text-white px-6 py-2.5 rounded-xl shadow-sm hover:shadow-sm hover:bg-[#152a4d] font-bold transition-all flex items-center">
             <i class="fas fa-plus mr-2"></i> Upload New Document
         </a>
         @endif
     </div>
 
-    <div class="bg-white shadow-md rounded my-6 overflow-x-auto">
+    <div class="bg-white shadow-sm rounded my-6 overflow-x-auto">
         <table class="min-w-full leading-normal">
             <thead>
                 <tr>
@@ -65,8 +65,8 @@
                         <p class="text-gray-900 whitespace-no-wrap">{{ $doc->created_at->format('d M Y') }}</p>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <a href="{{ route('documents.show', $doc->id) }}" class="text-blue-600 hover:text-blue-900 mr-3 block mb-1 font-bold">
-                            <i class="fas fa-eye"></i> Lihat Detail
+                        <a href="{{ route('documents.show', $doc->id) }}" class="text-gray-400 hover:text-blue-600 transition-colors mr-3" title="Detail">
+                            <i class="fas fa-eye text-lg"></i>
                         </a>
                         
                         @if($doc->status == 'pending' && trim(Auth::user()->role) == 'pimpinan')

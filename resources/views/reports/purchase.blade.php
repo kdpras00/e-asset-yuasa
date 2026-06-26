@@ -8,7 +8,7 @@
         </div>
         @if(Auth::user()->role != 'hrd')
         <a href="{{ route('transactions.purchase') }}" 
-           class="bg-gradient-to-r from-blue-700 to-blue-600 text-white px-8 py-3.5 rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 transition-all font-bold flex items-center gap-2">
+           class="bg-gradient-to-r from-blue-700 to-blue-600 text-white px-8 py-3.5 rounded-xl shadow-sm shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 transition-all font-bold flex items-center gap-2">
             <i class="fas fa-plus-circle text-lg"></i> 
             <span>Input Pembelian Baru</span>
         </a>
@@ -41,7 +41,7 @@
     </div>
 
 
-    <div class="bg-white shadow-xl shadow-gray-200/50 rounded-3xl overflow-hidden border border-gray-100">
+    <div class="bg-white shadow-sm shadow-gray-200/50 rounded-3xl overflow-hidden border border-gray-100">
         <div class="overflow-x-auto">
             <table class="min-w-full leading-normal">
                 <thead>
@@ -71,12 +71,7 @@
                     <tr class="hover:bg-blue-50/50 transition-colors">
                         <td class="px-6 py-4">
                             <div class="flex items-center">
-                                <div class="flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden border border-gray-200">
-                                    <img class="w-full h-full object-cover" 
-                                         src="{{ $asset->image ? asset('storage/'.$asset->image) : 'https://ui-avatars.com/api/?name='.urlencode($asset->name).'&background=random' }}" 
-                                         alt="{{ $asset->name }}">
-                                </div>
-                                <div class="ml-4">
+                                <div>
                                     <p class="text-sm font-bold text-gray-900">{{ $asset->name }}</p>
                                     <p class="text-xs text-gray-500 font-mono">{{ $asset->code }}</p>
                                 </div>
@@ -126,8 +121,8 @@
                                     </form>
                                 </div>
                             @else
-                                <a href="{{ route('assets.show', $asset->id) }}" class="text-blue-600 hover:text-blue-900 font-bold text-sm">
-                                    Detail <i class="fas fa-arrow-right ml-1"></i>
+                                <a href="{{ route('assets.show', $asset->id) }}" class="text-gray-400 hover:text-blue-600 transition-colors" title="Detail">
+                                    <i class="fas fa-eye text-lg"></i>
                                 </a>
                             @endif
                         </td>

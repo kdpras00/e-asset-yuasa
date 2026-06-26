@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar - E-Asset Yuasa</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-[#F8F9FC] font-sans antialiased flex items-center justify-center min-h-screen relative overflow-hidden">
+<body class="bg-[#EDECE2] font-sans antialiased flex items-center justify-center min-h-screen relative overflow-hidden">
     
     <!-- Background Decor -->
     <div class="absolute inset-0 z-0">
-        <div class="absolute top-0 left-0 w-full h-96 bg-[#0A1A32] rounded-b-[3rem] shadow-2xl"></div>
+        <div class="absolute top-0 left-0 w-full h-96 bg-[#030405] rounded-b-[3rem] shadow-sm"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#9E3E3E]/5 rounded-full blur-3xl"></div>
     </div>
 
     <div class="z-10 w-full max-w-md p-6">
-        <div class="bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-gray-100">
+        <div class="bg-white rounded-[2rem] shadow-sm overflow-hidden border border-gray-100">
             <!-- Header -->
             <div class="bg-gray-50/50 p-8 text-center border-b border-gray-100">
-                 <div class="inline-flex items-center justify-center p-3 bg-white rounded-2xl shadow-md mb-4">
-                    <img src="{{ asset('storage/logo.jpeg') }}" alt="Yuasa Logo" class="h-10">
+                 <div class="inline-flex items-center justify-center p-3 bg-white rounded-2xl shadow-sm mb-4">
+                    <img src="{{ asset('images/logoyuasa.png') }}" alt="Yuasa Logo" class="h-10">
                 </div>
                 <h2 class="text-2xl font-bold text-gray-800 tracking-tight">Buat Akun</h2>
                 <p class="text-gray-500 text-sm mt-1">Bergabung dengan sistem manajemen aset</p>
@@ -74,7 +74,7 @@
                         @enderror
                     </div>
 
-                    <button type="submit" class="w-full bg-[#0A1A32] text-white font-bold py-3.5 rounded-xl shadow-lg hover:bg-[#152a4d] hover:shadow-xl transition-all transform hover:-translate-y-0.5 mt-2">
+                    <button type="submit" class="w-full bg-[#030405] hover:bg-black text-white font-bold py-3.5 px-4 rounded-full transition-all flex items-center justify-center gap-2 group">
                         Buat Akun
                     </button>
                 </form>

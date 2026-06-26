@@ -79,7 +79,7 @@
 
             <!-- Footer -->
             <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end">
-                <button type="submit" class="bg-[#0A1A32] text-white px-6 py-2.5 rounded-xl shadow hover:shadow-lg hover:bg-[#152a4d] font-bold transition-all flex items-center">
+                <button type="submit" class="bg-[#0A1A32] text-white px-6 py-2.5 rounded-xl shadow hover:shadow-sm hover:bg-[#152a4d] font-bold transition-all flex items-center">
                     <i class="fas fa-check mr-2"></i> Konfirmasi Peminjaman
                 </button>
             </div>

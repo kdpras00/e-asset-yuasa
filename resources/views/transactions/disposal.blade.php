@@ -16,8 +16,8 @@
     <form action="{{ route('transactions.store.disposal') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
-        <div class="bg-white rounded-3xl shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden relative mb-8">
-            <div class="absolute top-0 w-full h-2 bg-gradient-to-r from-red-600 to-pink-600"></div>
+        <div class="bg-white rounded-3xl shadow-sm shadow-gray-200/50 border border-gray-100 overflow-hidden relative mb-8">
+
             
             <div class="p-6 md:p-8">
                 <!-- Table Header (Desktop) -->
@@ -90,7 +90,7 @@
 
         <!-- Submit Section -->
         <div class="flex justify-end">
-            <button type="submit" class="px-10 py-4 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-2xl shadow-xl shadow-red-500/30 hover:shadow-red-500/50 hover:-translate-y-1 transition-all font-bold text-lg flex items-center gap-3">
+            <button type="submit" class="px-10 py-4 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-2xl shadow-sm shadow-red-500/30 hover:shadow-red-500/50 hover:-translate-y-1 transition-all font-bold text-lg flex items-center gap-3">
                 <i class="fas fa-trash-alt"></i>
                 Ajukan Pemusnahan
             </button>

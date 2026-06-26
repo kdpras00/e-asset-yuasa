@@ -69,7 +69,7 @@
 
 <!-- Report Navigation Cards -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-    <a href="{{ route('assets.index') }}" class="group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+    <a href="{{ route('assets.index') }}" class="group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-sm transition-all">
         <div class="flex items-center gap-4">
             <div class="p-3 bg-blue-50 text-blue-600 rounded-xl group-hover:bg-blue-100 transition-colors">
                 <i class="fas fa-boxes text-xl"></i>
@@ -81,7 +81,7 @@
         </div>
     </a>
 
-    <a href="{{ route('maintenance.index') }}" class="group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+    <a href="{{ route('maintenance.index') }}" class="group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-sm transition-all">
         <div class="flex items-center gap-4">
             <div class="p-3 bg-yellow-50 text-yellow-600 rounded-xl group-hover:bg-yellow-100 transition-colors">
                 <i class="fas fa-tools text-xl"></i>
@@ -93,7 +93,7 @@
         </div>
     </a>
 
-    <a href="{{ route('disposal.index') }}" class="group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+    <a href="{{ route('disposal.index') }}" class="group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-sm transition-all">
         <div class="flex items-center gap-4">
             <div class="p-3 bg-red-50 text-red-600 rounded-xl group-hover:bg-red-100 transition-colors">
                 <i class="fas fa-trash-alt text-xl"></i>

@@ -11,7 +11,7 @@
         <!-- Only show Create button if allowed (e.g. not just for pimpinan, or everyone can request?) -->
         <!-- Usually everyone can Request, only Pimpinan approves. -->
         @if(Auth::user()->role != 'hrd')
-        <a href="{{ route('maintenance.create') }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-xl shadow-lg flex items-center transition-transform hover:-translate-y-0.5">
+        <a href="{{ route('maintenance.create') }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-xl shadow-sm flex items-center transition-transform hover:-translate-y-0.5">
             <i class="fas fa-plus mr-2"></i> Ajukan Perbaikan
         </a>
         @endif

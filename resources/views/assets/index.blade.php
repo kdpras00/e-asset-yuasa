@@ -15,11 +15,11 @@
             
             <!-- Export Button (All Roles) -->
             <div x-data="{ open: false }" class="relative">
-                <button @click="open = !open" @click.away="open = false" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-xl shadow-lg flex items-center transition-transform hover:-translate-y-0.5">
+                <button @click="open = !open" @click.away="open = false" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-xl shadow-sm flex items-center transition-transform hover:-translate-y-0.5">
                     <i class="fas fa-file-export mr-2"></i> Export
                     <i class="fas fa-chevron-down ml-2 text-xs"></i>
                 </button>
-                <div x-show="open" class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl z-50 overflow-hidden border border-gray-100" x-cloak>
+                <div x-show="open" class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-sm z-50 overflow-hidden border border-gray-100" x-cloak>
                     <a href="{{ route('assets.index', ['export' => 'excel', 'type' => 'all']) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-green-600">
                         <i class="fas fa-list mr-2"></i> Semua Data Aset
                     </a>
@@ -35,7 +35,7 @@
 
 
             @if(!in_array(Auth::user()->role, ['pimpinan', 'hrd']))
-            <a href="{{ route('transactions.purchase') }}" class="bg-[#9E3E3E] hover:bg-[#7a2e2e] text-white font-bold py-2 px-6 rounded-xl shadow-lg flex items-center transition-transform hover:-translate-y-0.5">
+            <a href="{{ route('transactions.purchase') }}" class="bg-[#9E3E3E] hover:bg-[#7a2e2e] text-white font-bold py-2 px-6 rounded-xl shadow-sm flex items-center transition-transform hover:-translate-y-0.5">
                 <i class="fas fa-plus mr-2"></i> Tambah Baru
             </a>
             @endif
@@ -43,7 +43,7 @@
     </div>
 
     @if(session('success'))
-        <div x-data="{ show: true }" x-show="show" x-transition class="bg-green-50 border-l-4 border-green-500 text-green-700 p-4 rounded-r shadow-md mb-6 flex justify-between items-center">
+        <div x-data="{ show: true }" x-show="show" x-transition class="bg-green-50 border-l-4 border-green-500 text-green-700 p-4 rounded-r shadow-sm mb-6 flex justify-between items-center">
             <div>
                  <p class="font-bold">Berhasil</p>
                  <p class="text-sm">{{ session('success') }}</p>
@@ -52,7 +52,7 @@
         </div>
     @endif
 
-    <div class="bg-white shadow-xl rounded-[20px] overflow-hidden border border-gray-100">
+    <div class="bg-white shadow-sm rounded-[20px] overflow-hidden border border-gray-100">
         <table class="min-w-full leading-normal">
             <thead>
                 <tr class="bg-gray-50 text-gray-600 border-b border-gray-200">
@@ -72,16 +72,7 @@
                 <tr class="hover:bg-blue-50/50 transition-colors group">
                     <td class="px-6 py-4">
                         <div class="flex items-center">
-                             <div class="flex-shrink-0 h-12 w-12 relative">
-                                @if($asset->image)
-                                    <img class="h-12 w-12 rounded-xl object-cover shadow-sm border border-gray-200 bg-white" src="{{ Storage::url($asset->image) }}" alt="">
-                                @else
-                                     <div class="h-12 w-12 rounded-xl bg-gray-100 flex items-center justify-center text-gray-400">
-                                         <i class="fas fa-image"></i>
-                                     </div>
-                                @endif
-                            </div>
-                            <div class="ml-4">
+                            <div>
                                 <div class="text-sm font-bold text-gray-900">{{ $asset->name }}</div>
                                 <div class="text-xs text-gray-500">{{ $asset->category }}</div>
                             </div>

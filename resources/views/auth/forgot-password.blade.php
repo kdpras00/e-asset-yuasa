@@ -12,11 +12,11 @@
 
      <!-- Background Decor -->
     <div class="absolute inset-0 z-0">
-        <div class="absolute top-0 left-0 w-full h-96 bg-[#0A1A32] rounded-b-[3rem] shadow-2xl"></div>
+        <div class="absolute top-0 left-0 w-full h-96 bg-[#0A1A32] rounded-b-[3rem] shadow-sm"></div>
     </div>
 
     <div class="z-10 w-full max-w-md p-6">
-        <div class="bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-gray-100">
+        <div class="bg-white rounded-[2rem] shadow-sm overflow-hidden border border-gray-100">
             <!-- Header -->
             <div class="bg-gray-50/50 p-8 text-center border-b border-gray-100">
                  <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-50 rounded-full mb-4 text-[#0A1A32]">
@@ -54,7 +54,7 @@
                         @enderror
                     </div>
 
-                    <button type="submit" class="w-full bg-[#0A1A32] text-white font-bold py-3.5 rounded-xl shadow-lg hover:bg-[#152a4d] hover:shadow-xl transition-all transform hover:-translate-y-0.5">
+                    <button type="submit" class="w-full bg-[#0A1A32] text-white font-bold py-3.5 rounded-xl shadow-sm hover:bg-[#152a4d] hover:shadow-sm transition-all transform hover:-translate-y-0.5">
                         Submit Request
                     </button>
                 </form>

@@ -8,8 +8,8 @@
         <p class="text-gray-500 text-lg">Ajukan perbaikan untuk aset yang mengalami kerusakan.</p>
     </div>
 
-    <div class="bg-white rounded-3xl shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden relative">
-        <div class="absolute top-0 w-full h-2 bg-gradient-to-r from-yellow-500 to-orange-500"></div>
+    <div class="bg-white rounded-3xl shadow-sm shadow-gray-200/50 border border-gray-100 overflow-hidden relative">
+
 
         <form action="{{ route('transactions.store.maintenance') }}" method="POST" enctype="multipart/form-data" class="p-8 md:p-10">
             @csrf
@@ -94,7 +94,7 @@
             </div>
 
             <div class="mt-10 pt-6 border-t border-gray-100 flex items-center justify-end gap-4">
-                <button type="submit" class="px-8 py-3.5 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-xl shadow-lg shadow-yellow-500/30 hover:shadow-yellow-500/50 hover:-translate-y-0.5 transition-all font-bold flex items-center gap-2">
+                <button type="submit" class="px-8 py-3.5 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-xl shadow-sm shadow-yellow-500/30 hover:shadow-yellow-500/50 hover:-translate-y-0.5 transition-all font-bold flex items-center gap-2">
                     <i class="fas fa-tools"></i>
                     Kirim Laporan
                 </button>

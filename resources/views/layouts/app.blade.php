@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Asset Yuasa</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -29,7 +29,7 @@
         /* .logo-icon { display: none; }  Removed to allow Alpine to control visibility */
     </style>
 </head>
-<body class="bg-[#F8F9FC] text-slate-800 antialiased preload" 
+<body class="bg-[#EDECE2] font-sans text-slate-800 antialiased preload" 
       x-data="{ sidebarOpen: localStorage.getItem('sidebarOpen') === 'false' ? false : true }" 
       x-init="$watch('sidebarOpen', val => localStorage.setItem('sidebarOpen', val)); setTimeout(() => { document.body.classList.remove('preload'); document.body.classList.remove('sidebar-closed'); }, 100)">
       
@@ -42,17 +42,17 @@
 
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar -->
-        <div :class="{ 'w-72': sidebarOpen, 'w-24': !sidebarOpen }" class="w-72 sidebar-main sidebar-grad text-white flex-shrink-0 transition-all duration-300 ease-[cubic-bezier(0.25,0.8,0.25,1)] flex flex-col shadow-2xl z-30 overflow-hidden">
+        <div :class="{ 'w-72': sidebarOpen, 'w-24': !sidebarOpen }" class="w-72 sidebar-main bg-[#030405] text-white flex-shrink-0 transition-all duration-300 ease-[cubic-bezier(0.25,0.8,0.25,1)] flex flex-col shadow-sm z-30 overflow-hidden">
             <!-- Logo Section -->
             <div class="h-24 flex items-center justify-center relative border-b border-white/10 m-2 rounded-xl bg-white/5">
                  <div class="logo-full flex items-center gap-3 px-4" x-show="sidebarOpen" x-cloak x-transition:enter="transition ease-out duration-300 delay-100" x-transition:enter-start="opacity-0 -translate-x-4" x-transition:enter-end="opacity-100 translate-x-0" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 translate-x-0" x-transition:leave-end="opacity-0 -translate-x-4">
-                     <img src="{{ asset('storage/logo.jpeg') }}" alt="Logo" class="h-10 rounded shadow-lg">
+                     <img src="{{ asset('images/logoyuasa.png') }}" alt="Logo" class="h-10 rounded shadow-sm">
                      <div class="leading-tight">
                          <span class="text-xl font-bold tracking-widest block">ASSET</span>
                          <span class="text-[10px] font-medium tracking-[0.2em] text-gray-400 block">MANAGEMENT</span>
                      </div>
                  </div>
-                 <img src="{{ asset('storage/logo.jpeg') }}" alt="Logo Icon" class="logo-icon h-10 rounded shadow-lg absolute" x-show="!sidebarOpen" x-cloak x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-50" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-50">
+                 <img src="{{ asset('images/logoyuasa.png') }}" alt="Logo Icon" class="logo-icon h-10 rounded shadow-sm absolute" x-show="!sidebarOpen" x-cloak x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-50" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-50">
             </div>
 
             <!-- Navigation -->
@@ -60,7 +60,7 @@
             <nav class="flex-1 overflow-y-auto py-6 px-3 space-y-1">
                 
                 <!-- GLOBAL Dashboard -->
-                <a href="{{ route('dashboard') }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->routeIs('dashboard') ? 'active text-white bg-white/10' : '' }}">
+                <a href="{{ route('dashboard') }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-full transition-all {{ request()->routeIs('dashboard') ? 'active text-[#030405] bg-white font-bold' : 'text-[#B4ADA5] hover:text-white' }}">
                     <span class="w-8 flex justify-center"><i class="fas fa-home text-lg group-hover:text-blue-400 transition-colors"></i></span>
                     <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen" x-transition:enter="transition ease-out duration-300 delay-100" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">Dashboard</span>
                 </a>
@@ -102,7 +102,7 @@
 
                     <!-- Laporan Dropdown -->
                     <div x-data="{ open: {{ request()->routeIs(['transactions.*', 'reports.purchase', 'maintenance.*', 'disposal.*']) ? 'true' : 'false' }} }">
-                        <button @click="open = !open" class="w-full sidebar-link group flex items-center justify-between px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->routeIs(['transactions.*', 'reports.purchase', 'maintenance.*', 'disposal.*']) ? 'active text-white bg-white/10' : '' }}">
+                        <button @click="open = !open" class="w-full sidebar-link group flex items-center justify-between px-4 py-3.5 rounded-full transition-all {{ request()->routeIs(['transactions.*', 'reports.purchase', 'maintenance.*', 'disposal.*']) ? 'active text-[#030405] bg-white font-bold' : 'text-[#B4ADA5] hover:text-white' }}">
                             <div class="flex items-center">
                                 <span class="w-8 flex justify-center"><i class="fas fa-file-invoice text-lg group-hover:text-green-400 transition-colors"></i></span>
                                 <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Laporan</span>
@@ -131,12 +131,12 @@
                 @if(Auth::user()->role == 'pimpinan')
                     <p class="menu-link-text px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2" x-show="sidebarOpen">Kepala Divisi</p>
                     
-                    <a href="{{ route('assets.index') }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->routeIs('assets.index') ? 'active text-white bg-white/10' : '' }}">
+                    <a href="{{ route('assets.index') }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-full transition-all {{ request()->routeIs('assets.index') ? 'active text-[#030405] bg-white font-bold' : 'text-[#B4ADA5] hover:text-white' }}">
                         <span class="w-8 flex justify-center"><i class="fas fa-search text-lg group-hover:text-blue-400 transition-colors"></i></span>
                         <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen"> Asset</span>
                     </a>
 
-                    <a href="{{ route('reports.index') }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->routeIs('reports.index') ? 'active text-white bg-white/10' : '' }}">
+                    <a href="{{ route('reports.index') }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-full transition-all {{ request()->routeIs('reports.index') ? 'active text-[#030405] bg-white font-bold' : 'text-[#B4ADA5] hover:text-white' }}">
                          <span class="w-8 flex justify-center"><i class="fas fa-file-contract text-lg group-hover:text-orange-400 transition-colors"></i></span>
                          <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen"> Dokumen</span>
                     </a>
@@ -149,8 +149,8 @@
                     </a> -->
 
                     <!-- Laporan Dropdown (Pimpinan) -->
-                    <div x-data="{ open: {{ request()->routeIs(['reports.*', 'maintenance.*', 'disposal.*']) ? 'true' : 'false' }} }">
-                        <button @click="open = !open" class="w-full sidebar-link group flex items-center justify-between px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->routeIs(['reports.*', 'maintenance.*', 'disposal.*']) ? 'active text-white bg-white/10' : '' }}">
+                    <div x-data="{ open: {{ request()->routeIs(['reports.purchase', 'maintenance.*', 'disposal.*']) ? 'true' : 'false' }} }">
+                        <button @click="open = !open" class="w-full sidebar-link group flex items-center justify-between px-4 py-3.5 rounded-full transition-all {{ request()->routeIs(['reports.purchase', 'maintenance.*', 'disposal.*']) ? 'active text-[#030405] bg-white font-bold' : 'text-[#B4ADA5] hover:text-white' }}">
                             <div class="flex items-center">
                                 <span class="w-8 flex justify-center"><i class="fas fa-chart-line text-lg group-hover:text-green-400 transition-colors"></i></span>
                                 <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Laporan</span>
@@ -159,7 +159,7 @@
                         </button>
                         
                         <div x-show="open && sidebarOpen" x-collapse class="pl-12 pr-4 space-y-1 mt-1">
-                            <a href="{{ route('assets.index') }}" class="block py-2 text-sm text-gray-400 hover:text-white {{ request()->routeIs('assets.index') ? 'text-white font-bold' : '' }}">
+                            <a href="{{ route('reports.purchase') }}" class="block py-2 text-sm text-gray-400 hover:text-white {{ request()->routeIs('reports.purchase') ? 'text-white font-bold' : '' }}">
                                 Riwayat Pembelian
                             </a>
                             <a href="{{ route('maintenance.index') }}" class="block py-2 text-sm text-gray-400 hover:text-white {{ request()->routeIs('maintenance.*') ? 'text-white font-bold' : '' }}">
@@ -178,19 +178,19 @@
                 @if(Auth::user()->role == 'hrd')
                     <p class="menu-link-text px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2" x-show="sidebarOpen">HRD Manager</p>
                     
-                    <a href="{{ route('assets.index') }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->routeIs('assets.index') ? 'active text-white bg-white/10' : '' }}">
+                    <a href="{{ route('assets.index') }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-full transition-all {{ request()->routeIs('assets.index') ? 'active text-[#030405] bg-white font-bold' : 'text-[#B4ADA5] hover:text-white' }}">
                         <span class="w-8 flex justify-center"><i class="fas fa-search text-lg group-hover:text-blue-400 transition-colors"></i></span>
                         <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen"> Asset</span>
                     </a>
 
-                    <a href="{{ route('reports.index') }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->routeIs('reports.index') ? 'active text-white bg-white/10' : '' }}">
+                    <a href="{{ route('reports.index') }}" class="sidebar-link group flex items-center px-4 py-3.5 rounded-full transition-all {{ request()->routeIs('reports.index') ? 'active text-[#030405] bg-white font-bold' : 'text-[#B4ADA5] hover:text-white' }}">
                          <span class="w-8 flex justify-center"><i class="fas fa-file-contract text-lg group-hover:text-orange-400 transition-colors"></i></span>
                          <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen"> Dokumen</span>
                     </a>
 
                     <!-- Laporan Dropdown (HRD - Read Only) -->
-                    <div x-data="{ open: {{ request()->routeIs(['reports.*', 'maintenance.*', 'disposal.*']) ? 'true' : 'false' }} }">
-                        <button @click="open = !open" class="w-full sidebar-link group flex items-center justify-between px-4 py-3.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all {{ request()->routeIs(['reports.*', 'maintenance.*', 'disposal.*']) ? 'active text-white bg-white/10' : '' }}">
+                    <div x-data="{ open: {{ request()->routeIs(['reports.purchase', 'maintenance.*', 'disposal.*']) ? 'true' : 'false' }} }">
+                        <button @click="open = !open" class="w-full sidebar-link group flex items-center justify-between px-4 py-3.5 rounded-full transition-all {{ request()->routeIs(['reports.purchase', 'maintenance.*', 'disposal.*']) ? 'active text-[#030405] bg-white font-bold' : 'text-[#B4ADA5] hover:text-white' }}">
                             <div class="flex items-center">
                                 <span class="w-8 flex justify-center"><i class="fas fa-chart-line text-lg group-hover:text-green-400 transition-colors"></i></span>
                                 <span class="menu-link-text ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Laporan</span>
@@ -218,7 +218,7 @@
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1 flex flex-col overflow-hidden relative bg-[#F8F9FC]">
+        <div class="flex-1 flex flex-col overflow-hidden relative bg-transparent">
             
             <!-- Top Header (Glassmorphism) -->
             <header class="h-20 glass-header flex items-center justify-between px-8 z-20 sticky top-0">
@@ -233,7 +233,7 @@
                         @else Overview @endif
                     </h2>
                 </div>
-                
+
                 <div class="flex items-center gap-6">
                     <!-- Date -->
                      <div class="hidden md:block text-right border-r pr-6 border-gray-200">
@@ -248,7 +248,7 @@
                                 <p class="text-sm font-bold text-gray-800 group-hover:text-blue-900 transition-colors">{{ Auth::user()->name ?? 'Guest' }}</p>
                                 <p class="text-[10px] text-gray-500 uppercase tracking-wider">{{ Auth::user()->role ?? 'User' }}</p>
                             </div>
-                            <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-[#0A1A32] to-[#1e3a66] flex items-center justify-center text-white font-bold text-lg shadow-lg ring-4 ring-gray-50 group-hover:ring-blue-50 transition-all">
+                            <div class="h-10 w-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-700 font-bold text-lg shadow-sm ring-4 ring-gray-50 group-hover:ring-blue-100 transition-all border border-blue-200">
                                 {{ substr(Auth::user()->name ?? 'U', 0, 1) }}
                             </div>
                             <i class="fas fa-chevron-down text-gray-400 text-xs transition-transform duration-300" :class="dropdownOpen ? 'rotate-180' : ''"></i>
@@ -263,7 +263,7 @@
                              x-transition:leave="transition ease-in duration-150"
                              x-transition:leave-start="opacity-100 translate-y-0"
                              x-transition:leave-end="opacity-0 translate-y-2"
-                             class="absolute right-0 mt-3 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50">
+                             class="absolute right-0 mt-3 w-56 bg-white rounded-2xl shadow-sm border border-gray-100 py-2 z-50">
                             
                             <div class="px-4 py-3 border-b border-gray-50 mb-1">
                                 <p class="text-sm text-gray-500">Masuk sebagai</p>

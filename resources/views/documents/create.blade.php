@@ -9,7 +9,7 @@
      </div>
 </div>
 
-<div class="bg-white p-8 rounded-[30px] shadow-lg max-w-5xl mx-auto">
+<div class="bg-white p-8 rounded-[30px] shadow-sm max-w-5xl mx-auto">
     <form action="{{ route('assets.documents.store', $asset->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         

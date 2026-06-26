@@ -35,59 +35,33 @@
     <!-- Content Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @forelse($categories as $cat)
-        <div class="bg-white rounded-[24px] p-6 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
-            <!-- Decorative Background -->
-            <div class="absolute top-0 right-0 w-32 h-32 bg-gray-50 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150 duration-700 ease-in-out"></div>
-            
-            <div class="relative z-10">
-                <!-- Card Header -->
-                <div class="flex items-start justify-between mb-4">
-                    <div class="flex items-center gap-4">
-                        <div class="h-14 w-14 rounded-2xl bg-gradient-to-br from-[#0A1A32] to-[#2a456b] flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-blue-900/20 group-hover:scale-110 transition-transform duration-300">
-                            {{ substr($cat->category, 0, 1) }}
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg text-gray-800 group-hover:text-[#0A1A32] transition-colors line-clamp-1">{{ $cat->category }}</h3>
-                            <p class="text-xs text-gray-500 flex items-center gap-1 mt-1">
-                                <i class="far fa-clock text-[10px]"></i>
-                                {{ \Carbon\Carbon::parse($cat->last_update)->diffForHumans() }}
-                            </p>
-                        </div>
+        <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-sm transition-all">
+            <div class="flex items-start justify-between mb-6">
+                <div class="flex items-center gap-4">
+                    <div class="h-12 w-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 text-xl border border-blue-100">
+                        <i class="fas fa-folder"></i>
                     </div>
-                </div>
-
-                <!-- Stats Sections -->
-                <div class="space-y-4">
-                    <!-- Asset Count Progress -->
                     <div>
-                        <div class="flex justify-between items-end mb-1">
-                            <span class="text-sm text-gray-500 font-medium">Total Item</span>
-                            <span class="text-lg font-bold text-gray-800">{{ $cat->count }}</span>
-                        </div>
-                        <div class="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
-                            <div class="bg-blue-600 h-full rounded-full transition-all duration-1000 ease-out" style="width: {{ min($cat->count * 2, 100) }}%"></div>
-                        </div>
+                        <h3 class="font-bold text-lg text-gray-900 line-clamp-1">{{ $cat->category }}</h3>
+                        <p class="text-xs text-gray-500 mt-1">Updated {{ \Carbon\Carbon::parse($cat->last_update)->diffForHumans() }}</p>
                     </div>
-
-                    <!-- Valuation -->
-                    <div class="bg-gray-50 rounded-xl p-3 border border-gray-100 group-hover:bg-blue-50/30 group-hover:border-blue-100 transition-colors">
-                         <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Total Valuasi</p>
-                         <p class="text-base font-bold text-gray-800 font-mono">
-                             Rp {{ number_format($cat->total_price, 0, ',', '.') }}
-                         </p>
-                    </div>
-                </div>
-
-                <!-- Action Footer -->
-                <div class="mt-6 pt-4 border-t border-gray-50 flex items-center justify-between">
-                     <a href="{{ route('assets.index', ['category' => $cat->category]) }}" class="inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors">
-                         Lihat Detail <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i>
-                     </a>
-                     <div class="flex -space-x-2">
-                         <!-- Placeholder avatars for "users" related to this category if we had that data, keeping it visual only for now with generic icons or remove -->
-                     </div>
                 </div>
             </div>
+
+            <div class="space-y-3 mb-6">
+                <div class="flex justify-between items-center py-2 border-b border-gray-50">
+                    <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Total Items</span>
+                    <span class="text-sm font-bold text-gray-900">{{ $cat->count }}</span>
+                </div>
+                <div class="flex justify-between items-center py-2">
+                    <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Valuation</span>
+                    <span class="text-sm font-bold text-gray-900">Rp {{ number_format($cat->total_price, 0, ',', '.') }}</span>
+                </div>
+            </div>
+
+            <a href="{{ route('assets.index', ['category' => $cat->category]) }}" class="w-full py-2.5 bg-gray-50 hover:bg-gray-100 text-gray-700 text-sm font-bold rounded-xl text-center transition-colors">
+                View Assets
+            </a>
         </div>
         @empty
         <div class="col-span-full py-12 flex flex-col items-center justify-center text-center">

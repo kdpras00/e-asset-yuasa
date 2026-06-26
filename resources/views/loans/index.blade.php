@@ -54,13 +54,6 @@
                         </td>
                         <td class="px-6 py-4">
                              <div class="flex items-center gap-3">
-                                @if($loan->asset->image)
-                                <img src="{{ Storage::url($loan->asset->image) }}" class="w-10 h-10 rounded-lg object-cover border border-gray-100">
-                                @else
-                                <div class="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400">
-                                    <i class="fas fa-box"></i>
-                                </div>
-                                @endif
                                 <div>
                                     <p class="font-medium text-gray-800">{{ $loan->asset->name }}</p>
                                     <p class="text-xs text-gray-400">{{ $loan->asset->code }}</p>
@@ -82,8 +75,8 @@
                             </span>
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <a href="{{ route('loans.show', $loan->id) }}" class="text-blue-600 hover:text-blue-900 block font-bold mb-2 text-xs">
-                                <i class="fas fa-eye mr-1"></i> Lihat Detail
+                            <a href="{{ route('loans.show', $loan->id) }}" class="text-gray-400 hover:text-blue-600 transition-colors" title="Detail">
+                                <i class="fas fa-eye text-lg"></i>
                             </a>
 
                             <!-- Mark Returned moved to Detail View -->

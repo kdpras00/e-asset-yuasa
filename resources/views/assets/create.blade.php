@@ -203,7 +203,7 @@
 
         <!-- Submit Button -->
         <div class="flex justify-end pt-4">
-            <button type="submit" class="bg-[#0A1A32] text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl hover:bg-[#152a4d] font-bold transition-all transform hover:-translate-y-0.5">
+            <button type="submit" class="bg-[#0A1A32] text-white px-8 py-3 rounded-xl shadow-sm hover:shadow-sm hover:bg-[#152a4d] font-bold transition-all transform hover:-translate-y-0.5">
                 <i class="fas fa-check-circle mr-2"></i> Save Asset
             </button>
         </div>

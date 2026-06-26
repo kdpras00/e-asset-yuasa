@@ -7,10 +7,10 @@
          <p class="text-gray-500 text-sm">Lihat spesifikasi lengkap dan riwayat.</p>
     </div>
     <div class="flex gap-3">
-         <button onclick="window.print()" class="bg-white text-gray-700 hover:text-gray-900 border px-4 py-2 rounded-lg shadow-sm font-medium transition-all hover:shadow-md">
+         <button onclick="window.print()" class="bg-white text-gray-700 hover:text-gray-900 border px-4 py-2 rounded-lg shadow-sm font-medium transition-all hover:shadow-sm">
             <i class="fas fa-print mr-2"></i> Cetak
         </button>
-        <a href="{{ route('assets.edit', $asset->id) }}" class="bg-[#0A1A32] text-white px-6 py-2 rounded-lg shadow-md font-medium hover:bg-[#152a4d] transition-all hover:-translate-y-0.5">
+        <a href="{{ route('assets.edit', $asset->id) }}" class="bg-[#0A1A32] text-white px-6 py-2 rounded-lg shadow-sm font-medium hover:bg-[#152a4d] transition-all hover:-translate-y-0.5">
             <i class="fas fa-edit mr-2"></i> Edit Aset
         </a>
     </div>

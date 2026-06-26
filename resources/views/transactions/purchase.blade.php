@@ -9,8 +9,8 @@
     </div>
 
     <!-- Form Card -->
-    <div class="bg-white rounded-3xl shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden relative">
-        <div class="absolute top-0 w-full h-2 bg-gradient-to-r from-blue-600 to-indigo-600"></div>
+    <div class="bg-white rounded-3xl shadow-sm shadow-gray-200/50 border border-gray-100 overflow-hidden relative">
+
         
         <form action="{{ route('transactions.store.purchase') }}" method="POST" enctype="multipart/form-data" class="p-8 md:p-10">
             @csrf
@@ -26,13 +26,7 @@
                                    class="w-full rounded-xl border-gray-300 bg-gray-50 px-4 py-3 focus:bg-white focus:ring-2 focus:ring-blue-100 focus:border-blue-500 transition-all font-medium" 
                                    required placeholder="Contoh: Laptop Dell XPS 13" value="{{ old('name') }}">
                         </div>
-                        <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-2">Kode Aset / SAP Code</label>
-                            <input type="text" name="code" 
-                                   class="w-full rounded-xl border-gray-300 bg-gray-100 px-4 py-3 text-gray-500 cursor-not-allowed font-mono" 
-                                   readonly placeholder="Digenarate Otomatis (Auto-generated)">
-                            <p class="text-xs text-gray-400 mt-1">Kode aset akan dibuat otomatis oleh sistem.</p>
-                        </div>
+
                         <div>
                             <label class="block text-sm font-bold text-gray-700 mb-2">Kategori <span class="text-red-500">*</span></label>
                             <div class="relative">
@@ -124,7 +118,7 @@
 
             <div class="mt-10 pt-6 border-t border-gray-100 flex items-center justify-between">
                 <a href="{{ route('dashboard') }}" class="text-gray-400 hover:text-gray-600 font-medium text-sm transition-colors">Batal</a>
-                <button type="submit" class="px-8 py-3.5 bg-gradient-to-r from-blue-700 to-blue-600 text-white rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 transition-all font-bold flex items-center gap-2">
+                <button type="submit" class="px-8 py-3.5 bg-gradient-to-r from-blue-700 to-blue-600 text-white rounded-xl shadow-sm shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 transition-all font-bold flex items-center gap-2">
                     <i class="fas fa-save"></i>
                     Simpan Aset Baru
                 </button>
